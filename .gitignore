@@ -1,0 +1,10 @@
+Servers/
+Server/
+build/
+WebContent/META-INF/
+WebContent/WEB-INF/
+.settings/
+.classpath
+.project
+/bin/
+.vscode/
