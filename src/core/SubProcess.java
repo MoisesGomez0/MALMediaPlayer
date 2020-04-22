@@ -22,6 +22,9 @@ public class SubProcess {
 	
 	/** Resultado de la operación */
 	private String result;
+	
+	/** Código de salida del sub proceso */
+	private int exitValue;
 
 	public SubProcess(String[] args) {
 		for(String arg : args) {
@@ -31,6 +34,13 @@ public class SubProcess {
 	
 	public SubProcess(List<String> args) {
 		this.commands = args;
+	}
+	
+	/**
+	 * @return the exitValue 
+	 */
+	public int getExitValue() {
+		return exitValue;
 	}
 	
 	/**
@@ -55,23 +65,26 @@ public class SubProcess {
 	}
 
 	/** Ejecuta el subproceso
-	 * @return 500 si el subproceso no se ejecuto, 
+	 * @return -1 si el subproceso no se ejecuto, retorna un valor distinto
+	 * a -1 si el subproceso se ejecuto pero no garantiza que esa ejecución
+	 * fue exitosa. Retorna el código de salida de subproceso.
 	 * 
 	 *  */
 	public int start() {
 		builder = new ProcessBuilder(commands);
+		this.result = "";
 		try {
 			process = builder.start();
-			process.waitFor();
+			this.exitValue = process.waitFor();
 			BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
 			this.result = br.lines().collect(Collectors.joining("\n"));
 			br.close();
-			return process.exitValue();
+			return this.exitValue;
 			
 		} catch (IOException e) {
-			return 500;
+			return -1;
 		} catch (InterruptedException e) {
-			return 500;
+			return -1;
 		}
 	}
 }

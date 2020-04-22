@@ -7,8 +7,20 @@ public enum UserStatus {
 	/** Registro de usuario completado satisfactoriamente */
 	SuccessRegistered,
 	
-	/** Usuario no registrado */
-	NoRegistered;
+	/**Un error ha ocurrido*/
+	error,
 	
+	/** Usuario no registrado */
+	NoRegistered,
+	
+	/** Usuario con sesión iniciada */
+	Logged,
+	
+	/** Usuario con sesión no iniciada */
+	NoLogged,
+	
+	/** Contraseña incorrecta */
+	WrongPass
+	;
 	
 }

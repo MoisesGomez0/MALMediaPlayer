@@ -8,3 +8,4 @@ WebContent/WEB-INF/
 .project
 /bin/
 .vscode/
+__pycache__/
