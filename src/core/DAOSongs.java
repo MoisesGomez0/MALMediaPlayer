@@ -51,6 +51,7 @@ public class DAOSongs {
 	
 	
 	public static void main(String[] args) {
+		System.out.println(new DAOSongs().search("esta"));
 		System.out.println( new DAOSongs().getAllSongs());
 		System.out.println(new DAOSongs().getAllAlbums());
 		System.out.println(new DAOSongs().getAllArtists());

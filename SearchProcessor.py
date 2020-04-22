@@ -14,13 +14,13 @@ class FileProcessor:
         return self
 
     def organize(self):
-        albums = {}
-        artists = {}
+        albums = set()
+        artists = set()
         for i in self.filesMatched:
             matchType = self.matchType(i)
 
             if matchType == "song":
-                self.organizedSongs["songsName"].append(Song(i).toDict())
+                self.organizedSongs["songs"].append(Song(i).toDict())
 
             elif matchType == "album":
                 albumName = i.split("_")[1]
@@ -30,8 +30,8 @@ class FileProcessor:
                 artistName = re.sub(r"\.((mp3)|(ogc))\n","",i.split("_")[2])
                 artists.add(artistName)
 
-        self.organizedSongs["albums"] : list(albums)
-        self.organizedSongs["artists"] : list(artists)
+        self.organizedSongs["albums"] = list(albums)
+        self.organizedSongs["artists"] = list(artists)
         
         return self
 
