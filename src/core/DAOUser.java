@@ -74,7 +74,7 @@ public class DAOUser {
 		);
 		subProcess.start();
 		if(subProcess.getExitValue() == 0) {
-			return subProcess.getResult().split(",")[1].strip();
+			return subProcess.getResult().split(",")[1].trim();
 		}else if(subProcess.getExitValue() == 1) {
 			return "#NonRegistred#";
 		}

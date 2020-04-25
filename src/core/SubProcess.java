@@ -87,4 +87,10 @@ public class SubProcess {
 			return -1;
 		}
 	}
+	
+	public static void main(String[] args) {
+		SubProcess sp = new SubProcess(new String[] {"ls","-l"});
+		sp.start();
+		System.out.println(sp.getResult());
+	}
 }

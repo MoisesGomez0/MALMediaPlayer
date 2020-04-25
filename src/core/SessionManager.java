@@ -44,8 +44,8 @@ public class SessionManager {
 		request.getParameter("password") != null
 		) {
 			
-			String name = request.getParameter("name").toString().strip();
-			String password = request.getParameter("password").toString().strip();
+			String name = request.getParameter("name").toString().trim();
+			String password = request.getParameter("password").toString().trim();
 			
 			if(mum.isRegistred(name) == 0) {
 				if(mum.getPassword(name).equals(password)) {

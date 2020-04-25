@@ -1,3 +1,4 @@
+<%@page import="core.DTOResponse"%>
 <%@page import="core.SessionManager"%>
 <%@page import="core.UserStatus" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,19 +9,19 @@
     
     switch (re){
     case Logged:
-    	out.print("{\"status\":true,\"message\":\"success login\"}");
+    	out.print(new DTOResponse(true,"success login").toString());
     	break;
     
     case WrongPass:
-    	out.print("{\"status\":false,\"message\":\"Wrong pass\"}");
+    	out.print(new DTOResponse(false,"Wrong pass").toString());
     	break;
     	
     case NoRegistered:
-    	out.print("{\"status\":false,\"message\":\"No Registred\"}");
+    	out.print(new DTOResponse(false,"No registered").toString());
     	break;	
     	
     default:
-    	out.print("{\"status\":false,\"message\":\"error\"}");
+    	out.print(new DTOResponse(false,"error").toString());
     }
     
     
