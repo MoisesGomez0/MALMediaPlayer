@@ -22,12 +22,12 @@ public class DTOResponse {
     
 	public DTOResponse(String status, String data) {
 		this.status = status;
-		this.data = data;
+		this.data = data.replaceAll("\'", "\"");
 	}
 	
 	public DTOResponse(boolean status, String data) {
 		this.status = Boolean.toString(status);
-		this.data = data;
+		this.data = data.replaceAll("\'", "\"");
 	}
 
 	@Override

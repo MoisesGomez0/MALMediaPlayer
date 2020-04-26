@@ -4,7 +4,11 @@
 <%@page import="core.SessionManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%><%
-        
+    
+    DAOSongs ds = new DAOSongs();
+	out.print(ds.search(request.getParameter("search")));
+    
+    /*
     if(request.getParameter("search") != null){
     	out.print(new DTOResponse(false,"No parameter to search").toString());
     }else{
@@ -26,7 +30,6 @@
 		    	out.print(ds.search(parameter));
     	
     	}
-    	
-    	
     }
+    */
 %>

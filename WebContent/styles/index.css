@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+.Conteiner{
+	display: -ms-flex;
+	display: -webkit-flex;
+	display: flex;
+}
+
+div#main{
+	width: 100vw;
+	height: 100vh;
+	left: 0vw;
+	top: 0vh;
+	background-color: gray;
+	position: fixed;
+	
+	flex-flow: row wrap;
+	align-content: flex-start;
+}
+
+div#header{
+	width: 100vw;
+	height: 50px;
+	background-color: #380B61;
+}
+
+.headerElement{
+	margin: 8px;
+}
+
+div#login{
+	width: 20px;
+	background-color: #585858;
+}
+
+div#signin{
+	width: 20px;
+	background-color: #01DF01;
+}
+
+div#menuButton{
+	width: 40px;
+	background-color: #DBA901;
+}
+
+input#searchBar{
+	width: 500px;
+}
+
+div#musicView{
+	flex: 1 1 70%;
+	flex-flow: column;
+	height: 100vh;
+	background-color: #8A0808;
+}
+
+div.musicViewElement{
+	margin: 5px;
+	padding: 5px;
+}
+
+div#songName{
+	background-color: white;
+	border: 10px solid orange;
+}
+
+div#musicBar{
+	background-color: #B43104;
+}
+
+div#musicInfo{
+	background-color: white;
+	border: 10px solid orange;
+	height: 70vh;
+	align-items: center;
+	justify-content: space-around;
+}
+
+div.musicInfoElement{
+	padding: 5px;
+	margin: 10px;
+	width: 30%;
+	height: 30%;
+	background-color: #D7DF01;
+}
+
+div#musicList{
+	flex:1 1 30%;
+	height: 100;
+	background-color: #088A08;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+div.musicListElement{
+	height: 40vh;
+	padding: 5px;
+	margin: 10px;
+	background-color: #0B610B;
+}
+
+
+
+
+

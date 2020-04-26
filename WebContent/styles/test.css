@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.conteiner{
+	
+	width: 60%;
+	height: 40%;
+	
+	top: 20vh;
+	left: 20vw;
+	position: fixed;
+	
+	background-color: white;
+	border: 10px solid orange;
+	
+	flex-flow: row wrap;
+	
+	align-content: flex-start;
+
+	display: -ms-flex;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.element{
+	padding: 5px;
+	margin: 10px;
+	background-color: #380B61;
+	text-align: center;
+}
+
+div#e1{
+	height: 10px;
+	width: 100%;
+}

@@ -27,10 +27,8 @@ public class DAOSongs {
 			return new DTOResponse(true, subProcess.getResult()).toString();
 		}
 		
-		return new DTOResponse(false,"External Component error").toString();
+		return new DTOResponse(false,"\"External Component error\"").toString();
 	}
-	
-	
 	
 	/**
 	 * Devuelve el nombres de todas las canciones existentes.

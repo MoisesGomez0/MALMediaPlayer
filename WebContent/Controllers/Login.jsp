@@ -9,19 +9,19 @@
     
     switch (re){
     case Logged:
-    	out.print(new DTOResponse(true,"success login").toString());
+    	out.print(new DTOResponse(true,"\"success login\"").toString());
     	break;
     
     case WrongPass:
-    	out.print(new DTOResponse(false,"Wrong pass").toString());
+    	out.print(new DTOResponse(false,"\"Wrong pass\"").toString());
     	break;
     	
     case NoRegistered:
-    	out.print(new DTOResponse(false,"No registered").toString());
+    	out.print(new DTOResponse(false,"\"No registered\"").toString());
     	break;	
     	
     default:
-    	out.print(new DTOResponse(false,"error").toString());
+    	out.print(new DTOResponse(false,"\"error\"").toString());
     }
     
     
