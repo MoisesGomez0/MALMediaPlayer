@@ -1,7 +1,7 @@
 package core;
 
 /** Objeto encargado al acceso a las canciones que existan en el servidor */
-public class DAOSongs {
+public class DAOLibrary {
 	
 	/**
 	 * Usado para la busqueda de canciones.
@@ -62,10 +62,10 @@ public class DAOSongs {
 	 * */
 	
 	public static void main(String[] args) {
-		System.out.println(new DAOSongs().search("6ttyt"));
-		System.out.println( new DAOSongs().getAllSongs());
-		System.out.println(new DAOSongs().getAllAlbums());
-		System.out.println(new DAOSongs().getAllArtists());
+		System.out.println(new DAOLibrary().search("6ttyt"));
+		System.out.println( new DAOLibrary().getAllSongs());
+		System.out.println(new DAOLibrary().getAllAlbums());
+		System.out.println(new DAOLibrary().getAllArtists());
 	}
 	
 }

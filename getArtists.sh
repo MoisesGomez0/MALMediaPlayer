@@ -1,1 +1,1 @@
-ls -1 Library | python ArtistsProcessor.py
+ls -1R Library | python ArtistsProcessor.py

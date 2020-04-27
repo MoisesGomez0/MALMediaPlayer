@@ -1,35 +1,31 @@
 <%@page import="core.DTOResponse"%>
-<%@page import="core.DAOSongs"%>
+<%@page import="core.DAOLibrary"%>
 <%@page import="core.UserStatus"%>
 <%@page import="core.SessionManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%><%
+ 	
+    /**
+		Controlador encargado de la búsqueda, este responde un 
+		String que representa un JSON conteniendo la data que corresponde
+		a la respuesta del modelo.
+		Necesita el parámetro search
+    */
     
-    DAOSongs ds = new DAOSongs();
-	out.print(ds.search(request.getParameter("search")));
     
-    /*
     if(request.getParameter("search") != null){
     	out.print(new DTOResponse(false,"No parameter to search").toString());
     }else{
-    	DAOSongs ds = new DAOSongs();
     	
-    	String parameter = request.getParameter("search").toString().trim();
+    	DAOLibrary dl = new DAOLibrary();
     	
-    	switch(parameter){
-    		case "#getAllSongs#":
-	    		out.print(ds.getAllSongs());
-				break;    			
-    		case "#getAllAlbums#":
-    			out.print(ds.getAllAlbums());
-    			break;
-    		case "#getAllArtists#":
-    			out.print(ds.getAllArtists());
-    			break;
-    		default:
-		    	out.print(ds.search(parameter));
-    	
-    	}
+    	out.print(
+    		new DTOResponse(true,
+	    		dl.search(
+					request.getParameter("search").toString().trim()
+	    			)
+    		)
+    	);
     }
-    */
+  
 %>

@@ -3,12 +3,12 @@ import re
 
 class Song:
     def __init__(self,fileName):
-        self.fileName = fileName[:-1]
+        self.fileName = fileName
         fileNameSplited = fileName.split("_")
 
         self.name = fileNameSplited[0]
         self.album = fileNameSplited[1]
-        self.artist = re.sub(r"\.((mp3)|(ogc))\n","",fileNameSplited[2])
+        self.artist = re.sub(r"\.((mp3)|(ogc))\n?","",fileNameSplited[2])
 
         del(fileNameSplited)
 

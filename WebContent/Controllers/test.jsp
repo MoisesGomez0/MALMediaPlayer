@@ -1,14 +1,16 @@
 <%@page import="core.SubProcess"%>
-<%@page import="core.DAOSongs" %>
+<%@page import="core.DAOLibrary" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%><%
-    
-    
-    SubProcess sp = new SubProcess(new String[] {"ls","-1"});
+	SubProcess sp = new SubProcess(new String[] {"pwd"});
     sp.start();
     out.print(sp.getExitValue());
     out.print(sp.getResult());
     
-    DAOSongs ds = new DAOSongs();
-	out.print(ds.search(request.getParameter("search")));
+    SubProcess sps = new SubProcess(new String[]{"ls"});
+    sps.start();
+    out.print(sps.getResult());
+    
+    /*DAOLibrary ds = new DAOLibrary();
+	out.print(ds.search(request.getParameter("search")));*/
 %>
