@@ -11,8 +11,20 @@ class ArtistsProcessor:
         filesName -> list Nombres de archivos leidos de la entrada estandar.
         artists -> dict Nombres de los artistas en nomenclatura acordada.
         """
-        self.filesNames = sys.stdin.readlines()
+        self.filesNames = self.readStdin()
         self.artists = {"artists":[]}
+
+    def readStdin(self):
+        """
+            Return a list
+            Lee la entrada estandar y toma solo los archivos que corresponden
+            con una canción.
+        """
+        return [
+            x[:-5] for x in sys.stdin.readlines() 
+            if x[-5:] == ".mp3\n" or x[-5:] == ".ogg\n"
+        ]
+
 
     def process(self):
         """

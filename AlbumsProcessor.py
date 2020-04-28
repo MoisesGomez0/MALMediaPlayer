@@ -11,8 +11,19 @@ class AlbumsProcessor:
         filesName -> list Nombres de archivos leidos de la entrada estandar.
         albums -> dict Nombres de albumes en nomenclatura acordada.
         """
-        self.filesNames = sys.stdin.readlines()
+        self.filesNames = self.readStdin()
         self.albums = {"albums":[]}
+
+    def readStdin(self):
+        """
+            Return a list
+            Lee la entrada estandar y toma solo los archivos que corresponden
+            con una canción.
+        """
+        return [
+            x[:-5] for x in sys.stdin.readlines() 
+            if x[-5:] == ".mp3\n" or x[-5:] == ".ogg\n"
+        ]
 
     def process(self):
         """
@@ -23,7 +34,7 @@ class AlbumsProcessor:
         self.albums["albums"] = list(
             set(
                 map(
-                    lambda x: x.split("_")[1],
+                    lambda x: "%s by %s" % (x.split("_")[1], x.split("_")[2]),
                     self.filesNames
                 )
             )

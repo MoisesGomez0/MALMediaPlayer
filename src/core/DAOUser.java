@@ -24,7 +24,8 @@ public class DAOUser {
 			SubProcess subProcess = new SubProcess(
 				new String[] {
 					"sh",
-					"register.sh",
+					"run.sh",
+					"-r",
 					String.format("%s,%s", name, password)
 				}
 			);
@@ -43,7 +44,8 @@ public class DAOUser {
 		SubProcess subProcess = new SubProcess(
 			new String[] {
 				"sh",
-				"getUser.sh",
+				"run.sh",
+				"-g",
 				String.format("^%s,",name)
 				}
 			);
@@ -88,7 +90,7 @@ public class DAOUser {
 		System.out.println(br.lines().collect(Collectors.joining("\n")));
 		*/
 		DAOUser um = new DAOUser();
-		System.out.println(um.register("Moises", "Gomez"));
+		System.out.println(um.register("Moisess", "Gomeza"));
 		System.out.println(um.register("Holas", "Mundos"));
 		System.out.println(um.register("Juan", "Pedro"));
 		System.out.println(um.getPassword("Moises"));

@@ -13,8 +13,8 @@
     */
     
     
-    if(request.getParameter("search") != null){
-    	out.print(new DTOResponse(false,"No parameter to search").toString());
+    if(request.getParameter("search") == null){
+    	out.print(new DTOResponse(false,"\"No parameter to search\"").toString());
     }else{
     	
     	DAOLibrary dl = new DAOLibrary();

@@ -10,7 +10,7 @@ public class DAOLibrary {
 	 * */
 	public String search(String param) {
 		
-		SubProcess sp = new SubProcess(new String[] {"sh","find.sh",param});
+		SubProcess sp = new SubProcess(new String[] {"sh","run.sh","-f",param});
 		return this.response(sp);
 		
 	}
@@ -34,7 +34,7 @@ public class DAOLibrary {
 	 * Devuelve el nombres de todas las canciones existentes.
 	 * */
 	public String getAllSongs() {
-		SubProcess sp = new SubProcess(new String[] {"sh","getSongs.sh"});
+		SubProcess sp = new SubProcess(new String[] {"sh","run.sh","-s"});
 		return this.response(sp);
 		
 	}
@@ -43,7 +43,7 @@ public class DAOLibrary {
 	 * Retorna el nombre de todos los albums.
 	 * */
 	public String getAllAlbums() {
-		SubProcess sp = new SubProcess(new String[] {"sh","getAlbums.sh"});
+		SubProcess sp = new SubProcess(new String[] {"sh","run.sh","-a"});
 		return this.response(sp);
 		
 	}
@@ -53,7 +53,7 @@ public class DAOLibrary {
 	 * guardadas canciones.
 	 * */
 	public String getAllArtists() {
-		SubProcess sp = new SubProcess(new String[] {"sh","getArtists.sh"});
+		SubProcess sp = new SubProcess(new String[] {"sh","run.sh","-A"});
 		return this.response(sp);
 	}
 	
@@ -63,6 +63,7 @@ public class DAOLibrary {
 	
 	public static void main(String[] args) {
 		System.out.println(new DAOLibrary().search("6ttyt"));
+		System.out.println(new DAOLibrary().search("hola"));
 		System.out.println( new DAOLibrary().getAllSongs());
 		System.out.println(new DAOLibrary().getAllAlbums());
 		System.out.println(new DAOLibrary().getAllArtists());
