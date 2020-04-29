@@ -20,11 +20,9 @@
     	DAOLibrary dl = new DAOLibrary();
     	
     	out.print(
-    		new DTOResponse(true,
 	    		dl.search(
 					request.getParameter("search").toString().trim()
-	    			)
-    		)
+					)		
     	);
     }
   

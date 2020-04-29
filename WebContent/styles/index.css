@@ -22,25 +22,56 @@ div#header{
 	width: 100vw;
 	height: 50px;
 	background-color: #380B61;
+	justify-content: space-between;
+	flex-flow: row wrap;
 }
 
 .headerElement{
+	background-color:#642EFE;
+}
+
+.inputElement{
 	margin: 8px;
 }
 
-div#login{
-	width: 20px;
-	background-color: #585858;
+.sessionButtonsElement{
+	width: 80px;
+	margin: 8px;
+	text-align: center;
+	color: white;
+	border: none;
 }
 
-div#signin{
-	width: 20px;
-	background-color: #01DF01;
+
+input#login{
+	background-color: #555555;
+}
+
+input#signin{
+	
+	background-color: #4CAF50;
+}
+
+div#musicSelector{
+	top: 50px;
+	left: 60px;
+	
+	height: 25vh;
+	width: 500px;
+	
+	background-color: white;
+	border: 4px solid blue;
+	overflow-y: scroll;
+	overflow-x: scroll;
+	z-index: 1;
+	position: fixed;
+	
 }
 
 div#menuButton{
 	width: 40px;
 	background-color: #DBA901;
+	flex-shrink: 0;
 }
 
 input#searchBar{
@@ -97,6 +128,46 @@ div.musicListElement{
 	padding: 5px;
 	margin: 10px;
 	background-color: #0B610B;
+}
+
+.overlay{
+	background: rgb(0,0,0,.3);
+	position: fixed;
+	top: 0vh;
+	left: 0vw;
+	width: 100vw;
+	height: 100vh;
+	align-items: center;
+	justify-content: center;
+	z-index: -1;	
+}
+
+div#loginPopup{
+	background-color: white;
+	width: 30vw;
+	flex-direction: column;
+	align-items: center;
+}
+
+.loginPopupElement{
+	margin: 8px;
+}
+
+div#inputLoginPopup{
+	flex-direction: column;
+	align-items: center;
+}
+
+.inputLoginPopupElement{
+	margin: 8px;
+}
+
+div#errorLoginPopup{
+	color: red;
+	background-color: white;
+	border: 2px solid red;
+	width: 200px;
+	word-wrap: break-word;
 }
 
 
