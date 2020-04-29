@@ -9,7 +9,7 @@ public class DAOLibrary {
 	 * @return Un String que representa un JSON
 	 * */
 	public String search(String param) {
-		
+		System.out.println(param);
 		SubProcess sp = new SubProcess(new String[] {"sh","run.sh","-f",param});
 		return this.response(sp);
 		
@@ -23,6 +23,7 @@ public class DAOLibrary {
 	private String response(SubProcess subProcess) {
 		
 		subProcess.start();
+		System.out.println(subProcess.getExitValue());
 		if(subProcess.getExitValue() == 0) {
 			return new DTOResponse(true, subProcess.getResult()).toString();
 		}
@@ -73,12 +74,13 @@ public class DAOLibrary {
 	 * */
 	
 	public static void main(String[] args) {
-		/*System.out.println(new DAOLibrary().search("6ttyt"));
-		System.out.println(new DAOLibrary().search("hola"));
+		System.out.println(new DAOLibrary().search("a"));
+		/*
 		System.out.println( new DAOLibrary().getAllSongs());
+		System.out.println(new DAOLibrary().search("hola"));
 		System.out.println(new DAOLibrary().getAllAlbums());
 		System.out.println(new DAOLibrary().getAllArtists());*/
-		System.out.println(new DAOLibrary().getPath("*asdf*"));
+		//System.out.println(new DAOLibrary().getPath("*asdf*"));
 	}
 	
 }

@@ -27,7 +27,7 @@ public class DTOResponse {
 	
 	public DTOResponse(boolean status, String data) {
 		this.status = Boolean.toString(status);
-		this.data = data.replaceAll("\'", "\"");
+		this.data = data.replaceAll("\'", "\"").replaceAll("(?<=\\w)\"(?=\\w)", "'");
 	}
 
 	@Override
