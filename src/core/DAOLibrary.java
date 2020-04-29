@@ -57,16 +57,28 @@ public class DAOLibrary {
 		return this.response(sp);
 	}
 	
+	public String getPath(String name) {
+		SubProcess sp = new SubProcess(new String[]{
+    			"sh",
+    			"run.sh",
+    			"-F",
+    			name
+    	});
+		sp.start();
+    	return sp.getResult();
+	}
+	
 	/*
 	 * Pruebas con la clase.
 	 * */
 	
 	public static void main(String[] args) {
-		System.out.println(new DAOLibrary().search("6ttyt"));
+		/*System.out.println(new DAOLibrary().search("6ttyt"));
 		System.out.println(new DAOLibrary().search("hola"));
 		System.out.println( new DAOLibrary().getAllSongs());
 		System.out.println(new DAOLibrary().getAllAlbums());
-		System.out.println(new DAOLibrary().getAllArtists());
+		System.out.println(new DAOLibrary().getAllArtists());*/
+		System.out.println(new DAOLibrary().getPath("*asdf*"));
 	}
 	
 }

@@ -3,27 +3,26 @@ package core;
 /** Clase que representa la abstracción de una canción */
 public class Song {
 	
+	public Song(String name, String album, String artist) {
+		this.name = name;
+		this.album = album;
+		this.artist = artist;
+	}
+	
 	/** Nombre de la canción */
-	public String name;
+	private String name;
 	
 	/** Nombre del album */
-	public String album;
+	private String album;
 	
 	/** Nombre del artista */
-	public String artist;
+	private String artist;
 
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	/**
@@ -34,25 +33,13 @@ public class Song {
 	}
 
 	/**
-	 * @param album the album to set
-	 */
-	public void setAlbum(String album) {
-		this.album = album;
-	}
-
-	/**
 	 * @return the artist
 	 */
 	public String getArtist() {
 		return artist;
 	}
 
-	/**
-	 * @param artist the artist to set
-	 */
-	public void setArtist(String artist) {
-		this.artist = artist;
-	}
+
 	
 	
 }

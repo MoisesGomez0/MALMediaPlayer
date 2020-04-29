@@ -24,7 +24,7 @@
 
 
 
-getopts ":f:aAsg:r:" optname
+getopts ":f:aAsg:r:c:F:" optname
     case "$optname" in
         "f")
             ls -1R Library/ | grep $OPTARG | python3 SearchProcessor.py $OPTARG
@@ -43,6 +43,9 @@ getopts ":f:aAsg:r:" optname
         ;;
         "r")
             echo $OPTARG >> users.csv
+        ;;
+        "F")
+            find . -name "*$OPTARG*"
         ;;
       "?")
         echo "No handled option $OPTARG"

@@ -34,7 +34,7 @@ class AlbumsProcessor:
         self.albums["albums"] = list(
             set(
                 map(
-                    lambda x: "%s by %s" % (x.split("_")[1], x.split("_")[2]),
+                    lambda x: x.split("_")[1],
                     self.filesNames
                 )
             )

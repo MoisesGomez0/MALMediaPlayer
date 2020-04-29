@@ -38,12 +38,13 @@ class Compressor:
 
     def crompress(self):
         for i in self.names:
-            self.file.write("Library/"+i)
+            try:
+                self.file.write(i)
+            except FileNotFoundError as fl:
+                pass
         self.file.close()
         return self
     
-    def getPath(self):
-        return "%s/%s" % (os.getcwd(),self.fileName)
 
 print(
     Compressor().splitNames().createFileName().createFile().crompress().fileName

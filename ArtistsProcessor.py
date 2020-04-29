@@ -35,7 +35,7 @@ class ArtistsProcessor:
         self.artists["artists"] = list(
             set(
                 map(
-                    lambda x: re.sub(r"\.((mp3)|(ogc))\n","",x.split("_")[2]),
+                    lambda x: x.split("_")[0],
                     self.filesNames
                 )
             )
