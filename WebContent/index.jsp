@@ -14,18 +14,20 @@
 <script>
 
 	sbm = new SearchBarManager();
+	mlm = new MusicListManager();
+	
 </script>
 
 </head>
-<body>
+<body onload="mlm.albumsData(); mlm.artistsData();">
 	
 	<div id="musicSelector"></div>
 	
-	<div id="main" class="Conteiner">
+	<div id="main" class="Conteiner" onclick="sbm.hideMusicSelector();">
 		<header>
 			<div id="header" class="Conteiner">
 				<div id="inputHeader" class="Conteiner headerElement">
-					<div id="menuButton" class="inputElement"></div>
+					<input type="button" id="download" class="inputElement" value="Download" >
 					<input type="text" onkeyup="sbm.change(this)" id="searchBar" class="inputElement"
 			 		placeholder="Escribe una canción, artista o álbum para buscar en la biblioteca.">
 				</div>
@@ -49,8 +51,8 @@
 		</div>
 		
 		<div id="musicList" class="Conteiner">
-			<div id="artists" class="musicListElement">artists</div>
-			<div id="albums" class="musicListElement">albums</div>		
+			<div id="artists" class="musicListElement"></div>
+			<div id="albums" class="musicListElement"></div>		
 		</div>
 	</div>
 	
