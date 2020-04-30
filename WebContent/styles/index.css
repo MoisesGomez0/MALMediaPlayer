@@ -21,22 +21,34 @@ div#main{
 div#header{
 	width: 100vw;
 	height: 50px;
-	background-color: #380B61;
+	background-color: #2E2E2E;
 	justify-content: space-between;
 	flex-flow: row wrap;
 }
 
 .headerElement{
-	background-color:#642EFE;
+	background-color: #2E2E2E;
 }
 
 .inputElement{
 	margin: 8px;
 }
 
+div#homeButton{
+	background-color: #8A0808;
+	color: white;
+	width: 40px;
+}
+
+img#imgHome{
+	width: 40px;
+	height: 50px;
+}
+
+
 input#download{
 	color: white;
-	background-color: #555555;
+	background-color: #642EFE;
 	text-align: center;
 	border: none;
 }
@@ -66,11 +78,14 @@ div#musicSelector{
 	width: 500px;
 	
 	background-color: white;
-	border: 4px solid blue;
+	border: 4px solid #2E2E2E;
 	overflow-y: scroll;
 	overflow-x: scroll;
-	position: fixed;
-	
+	position: fixed;	
+}
+
+label.musicSelectorLabel:hover{
+	background-color: #BDBDBD;
 }
 
 input#searchBar{
@@ -81,7 +96,7 @@ div#musicView{
 	flex: 1 1 70%;
 	flex-flow: column;
 	height: 100vh;
-	background-color: #8A0808;
+	background-color: #151515;
 }
 
 div.musicViewElement{
@@ -89,19 +104,25 @@ div.musicViewElement{
 	padding: 5px;
 }
 
+
 div#songName{
 	background-color: white;
-	border: 10px solid orange;
+	border: 4px solid #2E2E2E;
+	margin-top: 0px;
 }
 
 div#musicBar{
 	background-color: #B43104;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	flex-direction: row;
 }
 
 div#musicInfo{
 	background-color: white;
-	border: 10px solid orange;
+	border: 4px solid #2E2E2E;
 	height: 70vh;
+	margin-bottom: 0px;
 	align-items: center;
 	justify-content: space-around;
 }
@@ -109,8 +130,8 @@ div#musicInfo{
 div.musicInfoElement{
 	padding: 5px;
 	margin: 10px;
-	width: 30%;
-	height: 30%;
+	width: 20%;
+	height: 40%;
 	background-color: #D7DF01;
 }
 
@@ -163,6 +184,7 @@ div#inputLoginPopup{
 
 div#errorLoginPopup{
 	color: red;
+	font-size: small;
 	background-color: white;
 	border: 2px solid red;
 	width: 200px;

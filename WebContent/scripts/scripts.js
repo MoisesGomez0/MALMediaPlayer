@@ -1,8 +1,11 @@
+/**
+ * Maneja todas las acciones que tiene que ralizar la barra de búsqueda.
+ * 
+ */
 function SearchBarManager(){
-	
 	/**
 	 * Genera el selector de canciones con las canciones buscadas.
-	 * @param {input_tag} obj Barra de busqueda de la que depende.
+	 * @param {div} obj Div que representa al MusicSelector.
 	 * @param {list} Contenido del selector de canciones.
 	 */
 	this.showMusicSelector = function(data,obj = document.querySelector("div#musicSelector")){
@@ -15,15 +18,21 @@ function SearchBarManager(){
 			let fileName = song.fileName;
 			
 			obj.innerHTML += `<input type="checkbox" id="${fileName}" value="${fileName}">`
-			obj.innerHTML += `<label onclick="console.log('Reproduce la canción')"> ${artist}-${album}-${songName}</label><br>`
+			obj.innerHTML += `<label class="musicSelectorLabel" onclick="console.log('Reproduce la canción')"> ${artist}-${album}-${songName}</label><br>`
 		}
 			
 	}
 	
+	/**
+	 * Esconde el selector de canciones.
+	 */
 	this.hideMusicSelector = function(obj = document.querySelector("div#musicSelector")){
 		obj.style.zIndex = -1;
 	}
 	
+	/***
+	 * Realiza una acción cuando hay un cambio en la barra de búsqueda.
+	 */
 	var timeOut;
 	this.change = function(obj){
 		clearTimeout(timeOut);
@@ -38,6 +47,9 @@ function SearchBarManager(){
 	}
 }
 
+/**
+ * Maneja el contenido y las acciones del div que contiene la lista de albums y artistas.
+ */
 function MusicListManager(){
 	
 	/**
@@ -62,17 +74,22 @@ function MusicListManager(){
 		obj.innerHTML = ""; /**Limpia el contenido.*/
 		$.post("Controllers/getAllArtists.jsp",{},function(data){
 			data = JSON.parse(`${data}`.trim());
-			for (let artist of data.message.albums) {
+			for (let artist of data.message.artists) {
 				obj.innerHTML += `<label> ${artist}</label><br>`;
 			}
 		});
 	}
 }
 
+function MusicPlayer(){
+	this.audio = new Audio();
+	
+}
 
 function SessionManager(){
 	this.showLoginPopup = function(){
 		
 	}
 }
+
 

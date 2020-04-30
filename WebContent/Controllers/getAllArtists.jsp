@@ -9,6 +9,6 @@
     */
     
     DAOLibrary dl = new DAOLibrary();
-    dl.getAllArtists();
+    out.print(dl.getAllArtists());
     
     %>

@@ -1,34 +1,15 @@
 @charset "UTF-8";
 
-.conteiner{
-	
-	width: 60%;
-	height: 40%;
-	
-	top: 20vh;
-	left: 20vw;
+#home{
+	background-color: black;
+	top: 0vh;
+	left: 0vw;
+	width: 100vw;
+	height: 100vh;	
 	position: fixed;
-	
-	background-color: white;
-	border: 10px solid orange;
-	
-	flex-flow: row wrap;
-	
-	align-content: flex-start;
-
-	display: -ms-flex;
-	display: -webkit-flex;
-	display: flex;
 }
 
-.element{
-	padding: 5px;
-	margin: 10px;
-	background-color: #380B61;
-	text-align: center;
-}
-
-div#e1{
-	height: 10px;
-	width: 100%;
+#img{
+	width: 100vw;
+	height: 100vh;	
 }

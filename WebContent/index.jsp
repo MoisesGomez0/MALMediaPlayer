@@ -27,9 +27,12 @@
 		<header>
 			<div id="header" class="Conteiner">
 				<div id="inputHeader" class="Conteiner headerElement">
-					<input type="button" id="download" class="inputElement" value="Download" >
+					<div id="homeButton" class="inputElement">
+						
+					</div>
 					<input type="text" onkeyup="sbm.change(this)" id="searchBar" class="inputElement"
 			 		placeholder="Escribe una canción, artista o álbum para buscar en la biblioteca.">
+					<input type="button" id="download" class="inputElement" value="Download" >
 				</div>
 				
 				<div id="sessionButtons" class="Conteiner headerElement">
@@ -46,8 +49,11 @@
 				<div id="lyrics1" class="musicInfoElement">ly1</div>
 				<div id="lyrics2" class="musicInfoElement">ly2</div>
 			</div>
+			<div id="musicBar" class="Conteiner musicViewElement">
+				<div id="playButton" class="musicBarElement"></div>
+				<div id="volumeButton" class="musicBarElement"></div>
+			</div>
 			<div id="songName" class="musicViewElement">No hay tal cosa_Oceano_No niegues su existencia</div>
-			<div id="musicBar" class="musicViewElement">bar</div>
 		</div>
 		
 		<div id="musicList" class="Conteiner">
@@ -65,11 +71,11 @@
 				<input type="text" id="loginPassword" class="inputLoginPopupElement" placeholder="Contraseña.">
 			</div>
 			
-			<div id="errorLoginPopup" class="loginPopupElement">errorrrrrrrrrrrrrrrerrrrrrrrrr</div>
+			<div id="errorLoginPopup" class="loginPopupElement">El usuario o contraseña es incorrecto.</div>
 			
 			<div id="buttonsLoginPopup" class="Conteiner loginPopupElement">
-				<input type="button"  id="quitLogin" class="loginPopupElement" value="Cancelar">
-				<input type="button"  id="quitLogin" class="loginPopupElement" value="Aceptar">
+				<input type="button"  id="cancelLogin" class="loginPopupElement" value="Cancelar">
+				<input type="button"  id="aceptLogin" class="loginPopupElement" value="Aceptar">
 			</div>
 		</div>
 	

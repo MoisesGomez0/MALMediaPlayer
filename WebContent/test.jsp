@@ -5,16 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet" type="text/css" href="styles/test.css">
+
+<script src="jquery-3.4.1.min.js"></script>
+<script src="scripts/scripts.js"></script>
+
 </head>
 <body>
-
-	<div class="conteiner">
-		<div id="e1" class="element">1</div>
-		<div id="e2" class="element">2</div>
-		<div id="e3" class="element">3</div>
-		<div id="e4" class="element">4</div>
+	
+	<div id="home">
+		<img id="img" src="http://localhost:8080/WhiteHome.png">
 	</div>
-
+	
 </body>
 </html>
