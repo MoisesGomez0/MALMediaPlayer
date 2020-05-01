@@ -20,7 +20,9 @@
 # -r    Concatena una linea de texto que representa la información de un nuevo 
 #       usuario a el archivo que guarda tales datos. Requiere como parametro adicional 
 #       el nombre de usuario y la contraseña separadas por una coma i.e.: user@example.com,password
-
+# -F    Busca dentro del directorio donde es está ubicado las coincidencias de nombres de archivos
+#       segun el parametro adicional que este recibe, y escribe en la salida estandar la ruta relativa
+#       de los archivos coincidentes.
 
 
 

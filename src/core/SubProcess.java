@@ -63,6 +63,16 @@ public class SubProcess {
 	public String getResult() {
 		return result;
 	}
+	
+	/**
+	 * @param commands Comandos a ejecutar.
+	 * */
+	public void setCommands(String[] commands) {
+		this.commands.clear();
+		for(String arg : commands) {
+			this.commands.add(arg);
+		}
+	}
 
 	/** Ejecuta el subproceso
 	 * @return -1 si el subproceso no se ejecuto, retorna un valor distinto
@@ -71,6 +81,8 @@ public class SubProcess {
 	 * 
 	 *  */
 	public int start() {
+		this.result = null;
+		this.exitValue = -2000; 
 		builder = new ProcessBuilder(commands);
 		this.result = "";
 		try {
@@ -82,8 +94,10 @@ public class SubProcess {
 			return this.exitValue;
 			
 		} catch (IOException e) {
+			this.exitValue = -1;
 			return -1;
 		} catch (InterruptedException e) {
+			this.exitValue = -1;
 			return -1;
 		}
 	}
