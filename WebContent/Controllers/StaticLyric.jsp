@@ -23,7 +23,7 @@
 	    		)
 	    );
 	    
-	    out.print(new DTOResponse(true, l.getLyric()));
+	    out.print(new DTOResponse(true, String.format("\"%s\"", l.getLyric())));
     	
     }else{
     	out.print(new DTOResponse(false,"\"Invalid parameter\""));
