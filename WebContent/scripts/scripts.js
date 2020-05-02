@@ -18,7 +18,7 @@ function SearchBarManager(){
 			let fileName = song.fileName;
 			
 			obj.innerHTML += `<input type="checkbox" id="${fileName}" value="${fileName}">`
-			obj.innerHTML += `<label class="musicSelectorLabel" onclick="console.log('Reproduce la canción')"> ${artist}-${album}-${songName}</label><br>`
+			obj.innerHTML += `<label class="musicSelectorLabel" onclick="console.log('Reproduce la canción')" value="${fileName}"> ${artist}-${album}-${songName}</label><br>`
 		}
 			
 	}
@@ -81,8 +81,39 @@ function MusicListManager(){
 	}
 }
 
+function ViewManager(){
+	this.musicName = "";
+	this.albumImagePath = "";
+	this.audioPath = "";
+	this.lyrics1 = "";
+	
+	this.updateViewInfo = function(musicName,albumImagePath,audioPath,lyrics1){
+		this.musicName = musicName;
+		this.albumImagePath = albumImagePath;
+		this.audioPath = audioPath;
+		this.lyrics1 = lyrics1;
+	}
+	
+	this.setInfo = function(fileName){
+		
+	}
+}
+
+/**
+ * 
+ * @param fileName
+ * @returns
+ */
 function MusicPlayer(){
 	this.audio = new Audio();
+	
+	this.updateAudioSrc = function(data){
+		this.audio.src = data;
+	}
+	
+	this.setAudioSrc = function(){
+		
+	}
 	
 }
 

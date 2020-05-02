@@ -15,6 +15,8 @@
 
 	sbm = new SearchBarManager();
 	mlm = new MusicListManager();
+	mp = new MusicPlayer();
+	vm = new ViewManager();
 	
 </script>
 
