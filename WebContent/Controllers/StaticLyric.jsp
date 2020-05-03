@@ -23,7 +23,11 @@
 	    		)
 	    );
 	    
-	    out.print(new DTOResponse(true, String.format("\"%s\"", l.getLyric())));
+	    out.print(String.format(
+	    		"{\"status\":true,\"message\":\"%s\"}",
+	    		l.getLyric().replaceAll("\"", "'")
+	    		)
+	    	);
     	
     }else{
     	out.print(new DTOResponse(false,"\"Invalid parameter\""));
