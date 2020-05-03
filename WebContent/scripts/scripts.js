@@ -108,7 +108,7 @@ function ViewManager(){
 		var artistName = name.split("_")[0];
 		var albumName = name.split("_")[1];
 		
-		this.musicName = `${artistName} - ${albumName} -${songName}`; /**Obtiene el nombre completo de la canción.*/
+		this.musicName = `${artistName} - ${albumName} - ${songName}`; /**Obtiene el nombre completo de la canción.*/
 		musicNameDiv.innerHTML = this.musicName; /**Agrega el nombre al div correspondidente.*/
 		
 		console.group("Requests")
@@ -139,7 +139,7 @@ function ViewManager(){
 					albumImage.src = data.message.albumPath; /**Agrega la dirección donde se encuentra la imagen*/
 				}
 				
-				document.querySelector("video#musicBar").src = data.message.songPath;
+				mp.audio.src = data.message.songPath;
 				
 				console.log(data);
 			} catch (e) {
@@ -152,27 +152,32 @@ function ViewManager(){
 			console.groupEnd();
 		});
 		
-		
 		return false;
 	}
 }
 
 /**
- * 
- * @param fileName
+ * Realiza las acciones del audio.
  * @returns
  */
 function MusicPlayer(){
+	
 	this.audio = new Audio();
 	
-	this.updateAudioSrc = function(data){
-		this.audio.src = data;
-	}
-	
-	this.setAudioSrc = function(){
+	this.play = function(){
+		console.group("MusicPlayer");
+		console.log(this.audio.src)
+		console.groupEnd();
+		this.audio.play();
 		
+		return false;
 	}
 	
+	this.pause = function(){
+		this.audio.pause();
+		
+		return false;
+	}
 }
 
 function SessionManager(){

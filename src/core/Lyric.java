@@ -82,7 +82,7 @@ public class Lyric {
 		System.out.println(5);
 		
 		return response.replaceAll(
-				"([\\s\\S]+(<p id=\"songLyricsDiv\"  class=\"songLyricsV14 iComment-text\">))|((<br \\/><\\/p>)[\\s\\S]+)|(\")",
+				"([\\s\\S]+(<p id=\"songLyricsDiv\"  class=\"songLyricsV14 iComment-text\">))|((<br \\/><\\/p>)[\\s\\S]+)",
 				"");
 	}
 	

@@ -54,8 +54,8 @@
 				<div id="lyrics2" class="musicInfoElement">ly2</div>
 			</div>
 			<div id="musicBar" class="Conteiner musicViewElement">
-				<input type="button" id="play" class="musicBarElement" value="Play">
-				<input type="button" id="stop" class="musicBarElement" value="Stop">
+				<input type="button" id="play" class="musicBarElement" onclick="mp.play();" value="Play">
+				<input type="button" id="pause" class="musicBarElement" onclick="mp.pause();" value="Pause">
 			</div>
 			<div id="songName" class="musicViewElement">No hay tal cosa_Oceano_No niegues su existencia</div>
 		</div>
