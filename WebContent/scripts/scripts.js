@@ -18,8 +18,10 @@ function SearchBarManager(){
 			let fileName = song.fileName;
 			
 			obj.innerHTML += `<input type="checkbox" id="${fileName}" value="${fileName}">`
-			obj.innerHTML += `<label class="musicSelectorLabel" onclick="console.log('Reproduce la canción')" value="${fileName}"> ${artist}-${album}-${songName}</label><br>`
+			obj.innerHTML += `<label id="${fileName}" class="musicSelectorLabel" onclick="console.log(this.id);vm.setInfo(this.id);"> ${artist}-${album}-${songName}</label><br>`
 		}
+		
+		return false;
 			
 	}
 	
@@ -28,6 +30,8 @@ function SearchBarManager(){
 	 */
 	this.hideMusicSelector = function(obj = document.querySelector("div#musicSelector")){
 		obj.style.zIndex = -1;
+		
+		return false;
 	}
 	
 	/***
@@ -37,13 +41,13 @@ function SearchBarManager(){
 	this.change = function(obj){
 		clearTimeout(timeOut);
 		timeOut = setTimeout(function(){
-			console.log(obj.value);
 			$.post("Controllers/Search.jsp",{"search":obj.value},function(data){
 				data = JSON.parse(`${data}`.trim());
-				console.log(data);
 				sbm.showMusicSelector(data);
 			});
 		},300);
+		
+		return false;
 	}
 }
 
@@ -64,6 +68,8 @@ function MusicListManager(){
 				obj.innerHTML += `<label> ${album}</label><br>`;
 			}
 		});
+		
+		return false;
 	}
 	
 	/**
@@ -78,24 +84,76 @@ function MusicListManager(){
 				obj.innerHTML += `<label> ${artist}</label><br>`;
 			}
 		});
+		
+		return false;
 	}
 }
 
+
+/**
+ * Maneja la información de la canción.
+ * @returns
+ */
 function ViewManager(){
 	this.musicName = "";
-	this.albumImagePath = "";
-	this.audioPath = "";
-	this.lyrics1 = "";
 	
-	this.updateViewInfo = function(musicName,albumImagePath,audioPath,lyrics1){
-		this.musicName = musicName;
-		this.albumImagePath = albumImagePath;
-		this.audioPath = audioPath;
-		this.lyrics1 = lyrics1;
-	}
-	
+	/**Carga la información de la canción a los divs correspondientes.*/
 	this.setInfo = function(fileName){
+		var musicNameDiv = document.querySelector("div#songName");
+		var albumImage = document.querySelector("img#albumImage");
+		var lyrics1Div = document.querySelector("div#lyrics1");
 		
+		var name = fileName.replace(".mp3","");
+		var songName = name.split("_")[2];
+		var artistName = name.split("_")[0];
+		var albumName = name.split("_")[1];
+		
+		this.musicName = `${artistName} - ${albumName} -${songName}`; /**Obtiene el nombre completo de la canción.*/
+		musicNameDiv.innerHTML = this.musicName; /**Agrega el nombre al div correspondidente.*/
+		
+		console.group("Requests")
+		/**Petición de las lyrics1.*/
+		lyrics1Div.innerHTML = "";/**Limpia el contenido de lyrics1.*/
+		$.post("Controllers/StaticLyric.jsp",{"songName": songName, "albumName": albumName, "artist": artistName},function(data){
+			try {
+				console.group("lyrics");
+				data = JSON.parse(`${data}`.trim());
+				lyrics1Div.innerHTML = data.message; /**Agrega las lyrics al div correspondiente.*/	
+				console.log(data);
+			} catch (e) {
+				console.error("Fallo en la carga de las lyrics1.");
+				console.log(data);
+				console.groupEnd();
+			}
+		}).done(function(){
+			console.log("Lyrics1 cargadas correctamente.");
+			console.groupEnd();
+		});
+		
+		/**Petición de la imagen del album y el archivo mp3 de la canción.*/
+		$.post("Controllers/Play.jsp",{"fileName": fileName},function(data){
+			try {
+				console.group("Play");
+				data = JSON.parse(`${data}`.trim());
+				if (data.message.albumPath){
+					albumImage.src = data.message.albumPath; /**Agrega la dirección donde se encuentra la imagen*/
+				}
+				
+				document.querySelector("video#musicBar").src = data.message.songPath;
+				
+				console.log(data);
+			} catch (e) {
+				console.error("Fallo en la carga de la imagen del álbum");
+				console.log(data);
+				console.groupEnd();
+			}
+		}).done(function(){
+			console.log("Imagen del álbum cargadas correctamente.");
+			console.groupEnd();
+		});
+		
+		
+		return false;
 	}
 }
 

@@ -13,10 +13,10 @@
 
 <script>
 
-	sbm = new SearchBarManager();
-	mlm = new MusicListManager();
-	mp = new MusicPlayer();
-	vm = new ViewManager();
+	var sbm = new SearchBarManager();
+	var mlm = new MusicListManager();
+	var mp = new MusicPlayer();
+	var vm = new ViewManager();
 	
 </script>
 
@@ -47,13 +47,15 @@
 		
 		<div id="musicView" class="Conteiner">
 			<div id="musicInfo" class="Conteiner musicViewElement">
-				<div id="albumImage" class="musicInfoElement">img</div>
+				<div id="albumImage" class="musicInfoElement">
+					<img id="albumImage">
+				</div>
 				<div id="lyrics1" class="musicInfoElement">ly1</div>
 				<div id="lyrics2" class="musicInfoElement">ly2</div>
 			</div>
 			<div id="musicBar" class="Conteiner musicViewElement">
-				<div id="playButton" class="musicBarElement"></div>
-				<div id="volumeButton" class="musicBarElement"></div>
+				<input type="button" id="play" class="musicBarElement" value="Play">
+				<input type="button" id="stop" class="musicBarElement" value="Stop">
 			</div>
 			<div id="songName" class="musicViewElement">No hay tal cosa_Oceano_No niegues su existencia</div>
 		</div>
