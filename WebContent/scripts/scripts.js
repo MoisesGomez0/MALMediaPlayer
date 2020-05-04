@@ -270,6 +270,29 @@ function DownloadManager(){
 		return false;
 	}
 
+	/**
+	 * Inicia la compresión y descarga de las canciones en la downloadList.
+	 */
+	this.startDownload = function(){
+		var downloadLink = document.querySelector("a#downloadLink"); /**Anchor tag que comenzará la descarga. */
+		var parameterValue = this.downloadList.join("@");
+		
+		$.post("Controllers/Download.jsp",{"files": parameterValue},function(data){
+
+			data = JSON.parse(`${data}`.trim());
+
+			console.group("Download");
+			console.log(`Parameter files: ${parameterValue}`);
+			console.log(`Data: ${data}`);
+			console.groupEnd();
+
+			downloadLink.href = data.message; /**Guarda el link de descarga. */
+			downloadLink.click(); /**Inicia la descarga. */
+			downloadLink.href = ""; /**Elimina el link de descarga. */
+		});
+
+	}
+
 
 }
 
