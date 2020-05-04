@@ -17,6 +17,7 @@
 	var mlm = new MusicListManager();
 	var mp = new MusicPlayer();
 	var vm = new ViewManager();
+	var dm = new DownloadManager();
 	
 </script>
 
@@ -34,7 +35,7 @@
 					</div>
 					<input type="text" onkeyup="sbm.change(this)" id="searchBar" class="inputElement"
 			 		placeholder="Escribe una canción, artista o álbum para buscar en la biblioteca.">
-					<input type="button" id="download" class="inputElement" value="Download" >
+					<input type="button" id="download" class="inputElement" onclick="dm.showDownloadList();" value="Download" >
 				</div>
 				
 				<div id="sessionButtons" class="Conteiner headerElement">
@@ -57,7 +58,7 @@
 				<input type="button" id="play" class="musicBarElement" onclick="mp.play();" value="Play">
 				<input type="button" id="pause" class="musicBarElement" onclick="mp.pause();" value="Pause">
 			</div>
-			<div id="songName" class="musicViewElement">No hay tal cosa_Oceano_No niegues su existencia</div>
+			<div id="songName" class="musicViewElement"></div>
 		</div>
 		
 		<div id="musicList" class="Conteiner">
@@ -66,9 +67,9 @@
 		</div>
 	</div>
 	
-	<div class="Conteiner overlay">
-		<div id="loginPopup" class="Conteiner overlayElement">
-			<h3 id="loghinHeader" class="loginPopupElement">Inicia Sesión</h3>
+	<div id=overlayLogin class="Conteiner overlay">
+		<div id="loginPopup" class="Conteiner overlayLoginElement">
+			<h3 id="loginHeader" class="loginPopupElement">Inicia Sesión</h3>
 			
 			<div id="inputLoginPopup" class="Conteiner loginPopupElement">
 				<input type="text" id="loginName" class="inputLoginPopupElement" placeholder="Nombre de usuario.">
@@ -82,8 +83,21 @@
 				<input type="button"  id="aceptLogin" class="loginPopupElement" value="Aceptar">
 			</div>
 		</div>
-	
 	</div>	
+	
+	<div id=overlayDownload class="Conteiner overlay">
+		<div id=downloadPopup class="Conteiner overlayDownloadElement">
+			<h3 id="downloadHeader" class="downloadPopupElement">Lista de descarga.</h3>
+			
+			<div id="downloadList" class="downloadPopupElement"></div>
+			
+			<div id="downloadPopupButtons" class="Conteiner downloadPopupElement">
+				<input type="button" id="downloadSongs" class="downloadButtonsElement" value="Download">
+				<input type="button" id="closeDownload" class="downloadButtonsElement" onclick="dm.hideDownloadList()" value="Cerrar">
+			</div>
+			
+		</div>
+	</div>
 
 </body>
 </html>

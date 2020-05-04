@@ -3,6 +3,7 @@
  * 
  */
 function SearchBarManager(){
+	this.songList = [];
 	/**
 	 * Genera el selector de canciones con las canciones buscadas.
 	 * @param {div} obj Div que representa al MusicSelector.
@@ -10,6 +11,7 @@ function SearchBarManager(){
 	 */
 	this.showMusicSelector = function(data,obj = document.querySelector("div#musicSelector")){
 		obj.style.zIndex = 1; /**Muestra el objeto*/
+		this.songList = []; /**Limpia la lista de canciones.*/
 		obj.innerHTML = ""; /**Empieza sin valores*/
 		for (let song of data.message.songs) { /**Agrega todas las canciones encontradas por el servidor.**/
 			let artist = song.artist;
@@ -17,12 +19,56 @@ function SearchBarManager(){
 			let songName = song.name;
 			let fileName = song.fileName;
 			
-			obj.innerHTML += `<input type="checkbox" id="${fileName}" value="${fileName}">`
+			if (dm.downloadList.includes(fileName)){ /**Si ya está en la lista de descargas. */
+				/**La checkbox estará checked. */
+				obj.innerHTML += `<input type="checkbox" onchange="sbm.checkBoxAction(this);" id="${fileName}" value="${fileName} checked>`
+			}else{
+				obj.innerHTML += `<input type="checkbox" onchange="sbm.checkBoxAction(this);" id="${fileName}" value="${fileName}">`
+			}
+			
 			obj.innerHTML += `<label id="${fileName}" class="musicSelectorLabel" onclick="console.log(this.id);vm.setInfo(this.id);"> ${artist}-${album}-${songName}</label><br>`
 		}
 		
-		return false;
+		return false;		
+	}
+
+	/**
+	 * Acción que se realiza cuando un checkbox cambia de estado.
+	 */
+	this.checkBoxAction = function(obj){
+		console.group("CheckBoxAction");
+		var checked = obj.checked; /**Indica si el checkBox tiene un check.*/
+		var fileName = obj.id; /**El id del checkBox guarda el nombre del archivo. */
+
+		console.log(checked);
+		console.log(fileName);
+
+		/**Si la lista de descargas está vacía o la canción no ha sido seleccionada y está en check. */
+		console.group("case 1");
+		if ((dm.downloadList.length == 0 || !dm.downloadList.includes(fileName)) && checked){
+			console.log(dm.downloadList.length == 0);
+			console.log((dm.downloadList.length == 0 || !dm.downloadList.includes(fileName)) && checked);
 			
+			dm.downloadList.push(fileName);
+
+			console.log(dm.downloadList);
+		}
+		console.groupEnd();
+
+		/**Si la canción está en la lista y no está checked */
+		console.group("case 2");
+		if (dm.downloadList.includes(fileName) && !checked){
+			console.log(dm.downloadList.length == 0);
+			console.log((dm.downloadList.length == 0 || !dm.downloadList.includes(fileName)) && checked);
+			
+			dm.downloadList.splice(dm.downloadList.indexOf(fileName),1); /**Elimina la canción de la lista de descargas. */
+
+			console.log(dm.downloadList);
+		}
+		console.groupEnd();
+
+		console.groupEnd();
+		return false;
 	}
 	
 	/**
@@ -102,7 +148,8 @@ function ViewManager(){
 		var musicNameDiv = document.querySelector("div#songName");
 		var albumImage = document.querySelector("img#albumImage");
 		var lyrics1Div = document.querySelector("div#lyrics1");
-		
+		var lyrics2Div = document.querySelector("div#lyrics2");
+
 		var name = fileName.replace(".mp3","");
 		var songName = name.split("_")[2];
 		var artistName = name.split("_")[0];
@@ -116,7 +163,7 @@ function ViewManager(){
 		lyrics1Div.innerHTML = "";/**Limpia el contenido de lyrics1.*/
 		$.post("Controllers/StaticLyric.jsp",{"songName": songName, "albumName": albumName, "artist": artistName},function(data){
 			try {
-				console.group("lyrics");
+				console.group("lyrics1");
 				data = JSON.parse(`${data}`.trim());
 				lyrics1Div.innerHTML = data.message; /**Agrega las lyrics al div correspondiente.*/	
 				console.log(data);
@@ -127,6 +174,24 @@ function ViewManager(){
 			}
 		}).done(function(){
 			console.log("Lyrics1 cargadas correctamente.");
+			console.groupEnd();
+		});
+
+		/**Petición de las lyrics2*/
+		$.post("Controllers/APILyric.jsp",{"songName": songName, "albumName": albumName, "artist": artistName},function(data){
+			try {
+				console.group("lyrics2");
+				data = JSON.parse(`${data}`.trim());
+				lyrics2Div.innerHTML = data.message.body.lyrics.lyrics_body; /**Agrega las lyrics al div correspondiente.*/	
+				console.log(data);
+			} catch (e) {
+				console.error("Fallo en la carga de las lyrics2.");
+				console.error(e.message);
+				console.log(data);
+				console.groupEnd();
+			}
+		}).done(function(){
+			console.log("Lyrics2 cargadas correctamente.");
 			console.groupEnd();
 		});
 		
@@ -178,6 +243,26 @@ function MusicPlayer(){
 		
 		return false;
 	}
+}
+
+/**
+ * Administra el proceso de descarga de archivos.
+ */
+function DownloadManager(){
+	this.downloadList = []; /**Lista de canciones a descargar.*/
+
+	this.showDownloadList = function() {
+		var overlay = document.querySelector("div#overlayDownload"); /**Div que contiene la lista.*/
+		overlay.style.zIndex = 2;
+		return false;
+	}
+
+	this.hideDownloadList = function() {
+		var overlay = document.querySelector("div#overlayDownload"); /**Div que contiene la lista.*/
+		overlay.style.zIndex = -1;
+		return false;
+	}
+
 }
 
 function SessionManager(){
