@@ -20,124 +20,62 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.stream.Collectors;
 
 /** Accesa a una api para obtener la letra de una canción */
-public class DAOAPILirycs extends DAOLiryc{
+public class DAOAPILirycs{
 	
-	private String APIHost =  "canarado-lyrics.p.rapidapi.com";
-	private String APIKey = "a15f1160a8msh188ccf9361b9a47p18d92ajsn26031d598a4b";
+	/** Objeto que abtrae caracteristicas de una canción */
+	private Song song;
+	
+	/** URL sin datos específicos */
+	private String url = "https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=#SONG-NAME#&q_artist=#ARTIST#";
+	
+	/** key que se usa para reemplazar el espacio del artista*/
+	private String artist = "#ARTIST#";
+	
+	/** key usada para remplazar el espacio para el nombre de la canción*/
+	private String songName = "#SONG-NAME#";
+	
+	private String APIKey = "&apikey=30f122f4fe3ac6c0811e974e0352a676";
 	
 	public DAOAPILirycs(Song song) {
-		super.song = song;
-		super.url = "https://canarado-lyrics.p.rapidapi.com/lyrics/#ARTIST# #SONG-NAME#";
+		this.song = song;
 	}
 	
 	
+	/**
+	 * Hace una petición a una API y retorna información de la canción,
+	 * incluyendo la letra
+	 * */
 	public String getLyric() {
-		/**
-		 * Obtiene la letra de la canción y la devuelve en formato HTML
-		 * */
-		System.out.println(-1);
 		try {
-			URL url = new URL(
-					"https://canarado-lyrics.p.rapidapi.com/40 y 20 jose jose"
-					);
-			System.out.println(0);
+			URL url = new URL(String.format("%s%s",
+					this.url.replaceAll(this.artist, this.song.getArtist())
+					.replaceAll(this.songName, this.song.getName())
+					.replaceAll("\\s", "%20")
+					,this.APIKey
+					));
+			
 			HttpURLConnection conection = (HttpURLConnection) url.openConnection();
-			System.out.println(1);
-			
-			conection.setRequestMethod("GET");
-			conection.setRequestProperty("User-Agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		    conection.setRequestProperty("x-rapidapi-host", "canarado-lyrics.p.rapidapi.com");
-		    conection.setRequestProperty("x-rapidapi-key", "a15f1160a8msh188ccf9361b9a47p18d92ajsn26031d598a4b");
-		    /*
-		    conection.addRequestProperty("User-Agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		    conection.addRequestProperty("x-rapidapi-host", "canarado-lyrics.p.rapidapi.com");
-		    conection.addRequestProperty("x-rapidapi-key", "a15f1160a8msh188ccf9361b9a47p18d92ajsn26031d598a4b");
-		    */
-			System.out.println(2);
-			
-			
-			
+			conection.setRequestMethod("GET");						
 		    conection.connect();
-			System.out.println(3);
 			
-			System.out.println(conection.getContent());
-			
-			
-			url.openConnection();
-
 			BufferedReader br = new BufferedReader(new InputStreamReader(conection.getInputStream() , "UTF-8"));
-			System.out.println(br.lines().collect(Collectors.joining("")));
-			System.out.println(4);
-			return "return a last";
+			return br.lines().collect(Collectors.joining(""));
 			
 			
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			return null;
+			return "Bad request";
 
 		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
+			return "Bad responce";
 		}
 	}
 	
-	
 	public static void main(String[] args) {
-
-			  try {
-
-				URL url = new URL("https://canarado-lyrics.p.rapidapi.com/lyrics/my%2520way%2520frank%2520sinatra");
-				HttpURLConnection conection = (HttpURLConnection) url.openConnection();
-				
-				conection.setRequestMethod("GET");
 	
-				conection.setRequestProperty("x-rapidapi-host", "canarado-lyrics.p.rapidapi.com");
-			    conection.setRequestProperty("x-rapidapi-key", "a15f1160a8msh188ccf9361b9a47p18d92ajsn26031d598a4b");
-			    
-			    conection.connect();
-			    
-			    System.out.println(conection.getResponseCode());
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-				if (conection.getResponseCode() != 200) {
-					throw new RuntimeException("Failed : HTTP error code : "
-							+ conection.getResponseCode());
-				}
-
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-					(conection.getInputStream())));
-
-				String output;
-				System.out.println("Output from Server .... \n");
-				while ((output = br.readLine()) != null) {
-					System.out.println(output);
-				}
-
-				conection.disconnect();
-
-			  } catch (MalformedURLException e) {
-
-				e.printStackTrace();
-
-			  } catch (IOException e) {
-
-				e.printStackTrace();
-
-			  }
-
-
+		new DAOAPILirycs(new Song("my way","album","frank sinatra")).getLyric();
 	}
 	
 }
