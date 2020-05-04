@@ -1,3 +1,4 @@
+<%@page import="core.SubProcess"%>
 <%@page import="core.PlayManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%><%
@@ -13,7 +14,15 @@
    		copiados al Localhost Path si estos se copiaron correctamente.
     */
     
-	
+	SubProcess delete = new SubProcess(new String[]{
+			"sh",
+			"Model/run.sh",
+			"-d",
+			String.format("%s/ROOT/",System.getProperty("wtp.deploy"))
+		
+	});
+	delete.start();
+	    
     PlayManager pm = new PlayManager(request);
     
     out.print(pm.setToPlay());

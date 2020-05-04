@@ -20,12 +20,12 @@ class Compressor:
             Return a Compressor
             establece una cadena de 15 caracteres, esta se usa como nombre del archivo.
         """
-        self.fileName = "".join(
+        self.fileName =  "%s%s%s" %("SongPack_","".join(
             random.choices(
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-                k=15
+                k=3
             )
-        ) + ".zip"
+        ) , ".zip")
         return self
 
     def createFile(self):

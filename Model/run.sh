@@ -23,8 +23,11 @@
 # -F    Busca dentro del directorio donde es está ubicado las coincidencias de nombres de archivos
 #       segun el parametro adicional que este recibe, y escribe en la salida estandar la ruta relativa
 #       de los archivos coincidentes.
+# -d    Elimina los archivos de fuente multimedia, require como parámetro el Localhost-Path
+# -D    Elimina los archivos comprimidos en el Localhost-Path
 
-getopts ":f:aAsg:r:c:F:" optname
+
+getopts ":f:aAsg:r:c:F:d:D:" optname
     case "$optname" in
         "f")
             ls -1R Library/ | grep "$OPTARG" | python3 Model/SearchProcessor.py "$OPTARG"
@@ -48,6 +51,16 @@ getopts ":f:aAsg:r:c:F:" optname
         ;;
         "F")
             find . -iname "*$OPTARG*"
+        ;;
+        "d")
+            rm "$OPTARG"*.mp3
+            rm "$OPTARG"*.ogg
+            rm "$OPTARG"*.jpg
+            rm "$OPTARG"*.png
+            rm "$OPTARG"*.jpeg
+        ;;
+        "D")
+            rm "$OPTARG"*.zip
         ;;
       "?")
         echo "No handled option $OPTARG"

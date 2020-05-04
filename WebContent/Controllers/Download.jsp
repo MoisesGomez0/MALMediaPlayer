@@ -22,6 +22,18 @@
     if(request.getParameter("files") == null){
     	out.print(new DTOResponse(false,"\"No Parameter\""));
     }else{
+    	
+    	SubProcess delete = new SubProcess(new String[]{
+    			"sh",
+    			"Model/run.sh",
+    			"-D",
+    			String.format("%s/ROOT/",System.getProperty("wtp.deploy"))
+    			
+    	});
+    	delete.start();
+    	System.out.println("Deletiason");
+    	System.out.println(delete.getExitValue());
+    	
     	String[] files = request.getParameter("files").toString().trim().split("@");
     	
     	StringBuilder result = new StringBuilder("");
