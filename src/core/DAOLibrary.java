@@ -10,7 +10,7 @@ public class DAOLibrary {
 	 * */
 	public String search(String param) {
 		System.out.println(param);
-		SubProcess sp = new SubProcess(new String[] {"sh","run.sh","-f",param});
+		SubProcess sp = new SubProcess(new String[] {"sh","Model/run.sh","-f",param});
 		return this.response(sp);
 		
 	}
@@ -35,7 +35,7 @@ public class DAOLibrary {
 	 * Devuelve el nombres de todas las canciones existentes.
 	 * */
 	public String getAllSongs() {
-		SubProcess sp = new SubProcess(new String[] {"sh","run.sh","-s"});
+		SubProcess sp = new SubProcess(new String[] {"sh","Model/run.sh","-s"});
 		return this.response(sp);
 		
 	}
@@ -44,7 +44,7 @@ public class DAOLibrary {
 	 * Retorna el nombre de todos los albums.
 	 * */
 	public String getAllAlbums() {
-		SubProcess sp = new SubProcess(new String[] {"sh","run.sh","-a"});
+		SubProcess sp = new SubProcess(new String[] {"sh","Model/run.sh","-a"});
 		return this.response(sp);
 		
 	}
@@ -54,14 +54,14 @@ public class DAOLibrary {
 	 * guardadas canciones.
 	 * */
 	public String getAllArtists() {
-		SubProcess sp = new SubProcess(new String[] {"sh","run.sh","-A"});
+		SubProcess sp = new SubProcess(new String[] {"sh","Model/run.sh","-A"});
 		return this.response(sp);
 	}
 	
 	public String getPath(String name) {
 		SubProcess sp = new SubProcess(new String[]{
     			"sh",
-    			"run.sh",
+    			"Model/run.sh",
     			"-F",
     			name
     	});

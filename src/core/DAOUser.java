@@ -24,7 +24,7 @@ public class DAOUser {
 			SubProcess subProcess = new SubProcess(
 				new String[] {
 					"sh",
-					"run.sh",
+					"Model/run.sh",
 					"-r",
 					String.format("%s,%s", name, password)
 				}
@@ -44,7 +44,7 @@ public class DAOUser {
 		SubProcess subProcess = new SubProcess(
 			new String[] {
 				"sh",
-				"run.sh",
+				"Model/run.sh",
 				"-g",
 				String.format("^%s,",name)
 				}
@@ -70,7 +70,8 @@ public class DAOUser {
 		SubProcess subProcess = new SubProcess(
 			new String[] {
 				"sh",
-				"getUser.sh",
+				"Model/run.sh",
+				"-g",
 				String.format("^%s,", name)
 			}		
 		);

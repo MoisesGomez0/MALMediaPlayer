@@ -24,30 +24,30 @@
 #       segun el parametro adicional que este recibe, y escribe en la salida estandar la ruta relativa
 #       de los archivos coincidentes.
 
-
-
 getopts ":f:aAsg:r:c:F:" optname
     case "$optname" in
         "f")
-            ls -1R Library/ | grep "$OPTARG" | python3 SearchProcessor.py "$OPTARG"
+            ls -1R Library/ | grep "$OPTARG" | python3 Model/SearchProcessor.py "$OPTARG"
         ;;
         "a")
-            ls -1R Library/ | python3 AlbumsProcessor.py
+            ls -1R Library/ | python3 Model/AlbumsProcessor.py
         ;;
         "A")
-            ls -1R Library/ | python ArtistsProcessor.py
+            ls -1R Library/ | python3 Model/ArtistsProcessor.py
         ;;
         "s")
-            ls -1R Library | python3 SongsProcessor.py 
+            ls -1R Library | python3 Model/SongsProcessor.py 
         ;;
         "g")
+            cd Model/
             grep $OPTARG users.csv
         ;;
         "r")
+            cd Model/
             echo $OPTARG >> users.csv
         ;;
         "F")
-            find . -name "*$OPTARG*"
+            find . -iname "*$OPTARG*"
         ;;
       "?")
         echo "No handled option $OPTARG"

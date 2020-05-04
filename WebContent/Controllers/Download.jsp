@@ -30,7 +30,7 @@
     	for(String file: files){
 	    	SubProcess listFiles = new SubProcess(new String[]{
 	    			"sh",
-	    			"run.sh",
+	    			"Model/run.sh",
 	    			"-F",
 	    			String.format("%s",file)
 	    	});
@@ -41,12 +41,23 @@
     	
     	SubProcess compress = new SubProcess(new String[]{
     			"python3",
-    			"Compressor.py",
+    			"Model/Compressor.py",
 		    	result.toString()
     	});
     	compress.start();
     	
-    	out.print(compress.getResult());
+    	String fileCompressed = compress.getResult();
+    	String deployPath = String.format("%s/ROOT/",System.getProperty("wtp.deploy"));
+    	
+    	SubProcess move = new SubProcess(new String[] {
+    			"mv",
+    			fileCompressed,
+    			deployPath
+    	});
+    	
+    	if(move.start() == 0){
+    		out.print(new DTOResponse(true,String.format("\"http://localhost:8080/%s\"",fileCompressed)));
+    	}
     	
     }
     

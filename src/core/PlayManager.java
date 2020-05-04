@@ -28,7 +28,7 @@ public class PlayManager {
 	 * Retorna true si lo encontró.
 	 * */
 	private boolean findFile() {
-   		SubProcess sp = new SubProcess(new String[]{"sh","run.sh","-F",fileName});
+   		SubProcess sp = new SubProcess(new String[]{"sh","Model/run.sh","-F",fileName});
    		sp.start();
    		this.fullFileName = sp.getResult();
    		return sp.getExitValue() == 0;
