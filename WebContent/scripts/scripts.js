@@ -178,6 +178,7 @@ function ViewManager(){
 		});
 
 		/**Petición de las lyrics2*/
+		lyrics2Div.innerHTML = "";/**Limpia el contenido de lyrics2.*/
 		$.post("Controllers/APILyric.jsp",{"songName": songName, "albumName": albumName, "artist": artistName},function(data){
 			try {
 				console.group("lyrics2");
@@ -196,6 +197,8 @@ function ViewManager(){
 		});
 		
 		/**Petición de la imagen del album y el archivo mp3 de la canción.*/
+		albumImage.src="";
+		mp.audio.src="";
 		$.post("Controllers/Play.jsp",{"fileName": fileName},function(data){
 			try {
 				console.group("Play");
