@@ -93,8 +93,9 @@
 			<div id="downloadList" class="downloadPopupElement"></div>
 			
 			<div id="downloadPopupButtons" class="Conteiner downloadPopupElement">
-				<input type="button" id="downloadSongs" class="downloadButtonsElement" value="Download">
-				<input type="button" id="closeDownload" class="downloadButtonsElement" onclick="dm.hideDownloadList()" value="Cerrar">
+				<a id="downloadLink" download></a>
+				<input type="button" id="downloadSongs" class="downloadButtonsElement" onclick="dm.startDownload();" value="Download">
+				<input type="button" id="closeDownload" class="downloadButtonsElement" onclick="dm.hideDownloadList();" value="Cerrar">
 			</div>
 			
 		</div>
