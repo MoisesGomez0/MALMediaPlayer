@@ -181,9 +181,14 @@ div.musicListElement{
 div#downloadPopup{
 	height: 90vh;
 	width: 40vw;
-	background-color: white;
+	background-color: #151515;
 	flex-direction: column;
 	align-items: center;
+}
+
+div#downloadHeader{
+	color: #BDBDBD;
+	font-size: large;
 }
 
 div.downloadPopupElement{
@@ -191,7 +196,7 @@ div.downloadPopupElement{
 }
 
 div#downloadPopupButtons{
-	height: 50px;
+	height: 70px;
 }
 
 .downloadButtonsElement{
@@ -214,7 +219,7 @@ div#downloadList{
 	height: 90%;
 	width: 90%;
 	background-color: white;
-	border: 4px solid #2E2E2E;
+	border: 4px solid #642EFE;
 	overflow-y: scroll;
 	overflow-x: scroll;
 }

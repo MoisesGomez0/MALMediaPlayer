@@ -21,7 +21,7 @@ function SearchBarManager(){
 			
 			if (dm.downloadList.includes(fileName)){ /**Si ya está en la lista de descargas. */
 				/**La checkbox estará checked. */
-				obj.innerHTML += `<input type="checkbox" onchange="sbm.checkBoxAction(this);" id="${fileName}" value="${fileName} checked>`
+				obj.innerHTML += `<input type="checkbox" onchange="sbm.checkBoxAction(this);" id="${fileName}" value="${fileName}" checked>`
 			}else{
 				obj.innerHTML += `<input type="checkbox" onchange="sbm.checkBoxAction(this);" id="${fileName}" value="${fileName}">`
 			}
@@ -38,7 +38,7 @@ function SearchBarManager(){
 	this.checkBoxAction = function(obj){
 		console.group("CheckBoxAction");
 		var checked = obj.checked; /**Indica si el checkBox tiene un check.*/
-		var fileName = obj.id; /**El id del checkBox guarda el nombre del archivo. */
+		var fileName = obj.id; /**El nombre del archivo que teien como id el checkbox. */
 
 		console.log(checked);
 		console.log(fileName);
@@ -251,8 +251,15 @@ function MusicPlayer(){
 function DownloadManager(){
 	this.downloadList = []; /**Lista de canciones a descargar.*/
 
-	this.showDownloadList = function() {
+	this.showDownloadList = function(obj = document.querySelector("div#downloadList")) {
 		var overlay = document.querySelector("div#overlayDownload"); /**Div que contiene la lista.*/
+		obj.innerHTML = ""; /**Limpia el contenedor de la lista. */
+		for (let fileName of this.downloadList) { /**Agrega todas las canciones en la lista de descarga.**/
+			
+			obj.innerHTML += `<input type="checkbox" onchange="sbm.checkBoxAction(this);" id="${fileName}" value="${fileName}" checked>`
+			obj.innerHTML += `<label id="${fileName}" class="musicSelectorLabel" onclick="console.log(this.id);vm.setInfo(this.id);"> ${fileName}</label><br>`
+		}
+		
 		overlay.style.zIndex = 2;
 		return false;
 	}
@@ -262,6 +269,7 @@ function DownloadManager(){
 		overlay.style.zIndex = -1;
 		return false;
 	}
+
 
 }
 

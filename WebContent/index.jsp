@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,7 +88,7 @@
 	
 	<div id=overlayDownload class="Conteiner overlay">
 		<div id=downloadPopup class="Conteiner overlayDownloadElement">
-			<h3 id="downloadHeader" class="downloadPopupElement">Lista de descarga.</h3>
+			<div id="downloadHeader" class="downloadPopupElement">Lista de descarga.</div>
 			
 			<div id="downloadList" class="downloadPopupElement"></div>
 			
