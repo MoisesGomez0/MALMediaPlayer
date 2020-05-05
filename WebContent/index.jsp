@@ -31,9 +31,7 @@
 		<header>
 			<div id="header" class="Conteiner">
 				<div id="inputHeader" class="Conteiner headerElement">
-					<div id="homeButton" class="inputElement">
-						
-					</div>
+					<div id="homeButton" class="inputElement"></div>
 					<input type="text" onkeyup="sbm.change(this)" id="searchBar" class="inputElement"
 			 		placeholder="Escribe una canción, artista o álbum para buscar en la biblioteca.">
 					<input type="button" id="download" class="inputElement" onclick="dm.showDownloadList();" value="Download" >

@@ -38,11 +38,9 @@ div#homeButton{
 	background-color: #8A0808;
 	color: white;
 	width: 40px;
-}
-
-img#imgHome{
-	width: 100%;
-	height: 100%;
+	background-image: url('images/home.png');
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 
