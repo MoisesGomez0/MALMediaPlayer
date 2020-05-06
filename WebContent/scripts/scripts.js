@@ -10,6 +10,7 @@ function SearchBarManager(){
 	 * @param {list} Contenido del selector de canciones.
 	 */
 	this.showMusicSelector = function(data,obj = document.querySelector("div#musicSelector")){
+
 		obj.style.zIndex = 1; /**Muestra el objeto*/
 		this.songList = []; /**Limpia la lista de canciones.*/
 		obj.innerHTML = ""; /**Empieza sin valores*/
@@ -26,7 +27,7 @@ function SearchBarManager(){
 				obj.innerHTML += `<input type="checkbox" onchange="sbm.checkBoxAction(this);" id="${fileName}" value="${fileName}">`
 			}
 			
-			obj.innerHTML += `<label id="${fileName}" class="musicSelectorLabel" onclick="console.log(this.id);vm.setInfo(this.id);"> ${artist}-${album}-${songName}</label><br>`
+			obj.innerHTML += `<label id="${fileName}" class="musicSelectorLabel" onclick="vm.setInfo(this.id);"> ${artist}-${album}-${songName}</label><br>`
 		}
 		
 		return false;		
@@ -85,9 +86,17 @@ function SearchBarManager(){
 	 */
 	var timeOut;
 	this.change = function(obj){
+		var val;
+
+		if(!obj.value){
+			val = obj.innerHTML;
+		}else{
+			val = obj.value; 
+		}
+
 		clearTimeout(timeOut);
 		timeOut = setTimeout(function(){
-			$.post("Controllers/Search.jsp",{"search":obj.value},function(data){
+			$.post("Controllers/Search.jsp",{"search":val},function(data){
 				data = JSON.parse(`${data}`.trim());
 				sbm.showMusicSelector(data);
 			});
@@ -111,7 +120,7 @@ function MusicListManager(){
 		$.post("Controllers/getAlbums.jsp",{},function(data){
 			data = JSON.parse(`${data}`.trim());
 			for (let album of data.message.albums) {
-				obj.innerHTML += `<label> ${album}</label><br>`;
+				obj.innerHTML += `<label class="listLabel" onclick="sbm.change(this);"> ${album}</label><br>`;
 			}
 		});
 		
@@ -127,7 +136,7 @@ function MusicListManager(){
 		$.post("Controllers/getAllArtists.jsp",{},function(data){
 			data = JSON.parse(`${data}`.trim());
 			for (let artist of data.message.artists) {
-				obj.innerHTML += `<label> ${artist}</label><br>`;
+				obj.innerHTML += `<label class="listLabel" onclick="sbm.change(this);"> ${artist}</label><br>`;
 			}
 		});
 		
@@ -143,17 +152,49 @@ function MusicListManager(){
 function ViewManager(){
 	this.musicName = "";
 	
+	this.homeAction = function(){
+		var mainInfo = document.querySelector("div#mainInfo");
+		var mainArt = document.querySelector("div#mainArt");
+		var audio = document.querySelector("audio#audioTag");
+		audio.pause();
+		audio.src = "";
+
+		mainInfo.style.width = 0;
+		mainInfo.style.height = 0;
+
+		mainArt.style.width = "100%";
+		mainArt.style.height = "100%";
+
+		return false;
+	}
+
+	this.showInfo = function(){
+		var mainInfo = document.querySelector("div#mainInfo");
+		var mainArt = document.querySelector("div#mainArt");
+
+		mainArt.style.width = 0;
+		mainArt.style.height = 0;
+
+		mainInfo.style.width = "100%";
+		mainInfo.style.height = "100%";
+
+		return false;
+	}
+
 	/**Carga la información de la canción a los divs correspondientes.*/
 	this.setInfo = function(fileName){
 		var musicNameDiv = document.querySelector("div#songName");
 		var albumImage = document.querySelector("img#albumImage");
 		var lyrics1Div = document.querySelector("div#lyrics1");
 		var lyrics2Div = document.querySelector("div#lyrics2");
+		var audio = document.querySelector("audio#audioTag");
 
 		var name = fileName.replace(".mp3","");
 		var songName = name.split("_")[2];
 		var artistName = name.split("_")[0];
 		var albumName = name.split("_")[1];
+
+		this.showInfo();
 		
 		this.musicName = `${artistName} - ${albumName} - ${songName}`; /**Obtiene el nombre completo de la canción.*/
 		musicNameDiv.innerHTML = this.musicName; /**Agrega el nombre al div correspondidente.*/
@@ -198,7 +239,7 @@ function ViewManager(){
 		
 		/**Petición de la imagen del album y el archivo mp3 de la canción.*/
 		albumImage.src="";
-		mp.audio.src="";
+		audio.src=""; /**Limpia el audio. */
 		$.post("Controllers/Play.jsp",{"fileName": fileName},function(data){
 			try {
 				console.group("Play");
@@ -206,10 +247,9 @@ function ViewManager(){
 				if (data.message.albumPath){
 					albumImage.src = data.message.albumPath; /**Agrega la dirección donde se encuentra la imagen*/
 				}
-				
-				mp.audio.src = data.message.songPath;
-				
+				audio.src = data.message.songPath;
 				console.log(data);
+				console.log(audio.src);
 			} catch (e) {
 				console.error("Fallo en la carga de la imagen del álbum");
 				console.log(data);
@@ -232,20 +272,30 @@ function MusicPlayer(){
 	
 	this.audio = new Audio();
 	
-	this.play = function(){
+	this.play = function(obj = document.querySelector("img#playButton")){
+		var icon = obj.src;
+
+		var playIconPath = "http://localhost:8080/MALMediaPlayer/styles/images/playIcon.png";
+		var pauseIconPath = "http://localhost:8080/MALMediaPlayer/styles/images/pauseIcon.png";
+
 		console.group("MusicPlayer");
+		console.log(`Icon: ${icon}`);
 		console.log(this.audio.src)
 		console.groupEnd();
-		this.audio.play();
+
+		if (icon == playIconPath && this.audio.src){/**Está en pause. */
+			obj.src = pauseIconPath; /**Cambia a play. */
+			this.audio.play();
+
+		}else if(icon == pauseIconPath && this.audio.src){ /**Está en play. */
+			obj.src = playIconPath; /**Cambia a pause */
+			this.audio.pause();
+		}
+
 		
 		return false;
 	}
 	
-	this.pause = function(){
-		this.audio.pause();
-		
-		return false;
-	}
 }
 
 /**

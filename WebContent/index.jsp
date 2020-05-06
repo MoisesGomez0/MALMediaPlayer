@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MALmediaPlayer</title>
 
 <link rel="stylesheet" type="text/css" href="styles/index.css">
 
@@ -31,7 +31,7 @@
 		<header>
 			<div id="header" class="Conteiner">
 				<div id="inputHeader" class="Conteiner headerElement">
-					<div id="homeButton" class="inputElement"></div>
+					<div id="homeButton" class="inputElement" onclick="vm.homeAction();"></div>
 					<input type="text" onkeyup="sbm.change(this)" id="searchBar" class="inputElement"
 			 		placeholder="Escribe una canción, artista o álbum para buscar en la biblioteca.">
 					<input type="button" id="download" class="inputElement" onclick="dm.showDownloadList();" value="Download" >
@@ -46,18 +46,25 @@
 		</header>
 		
 		<div id="musicView" class="Conteiner">
-			<div id="musicInfo" class="Conteiner musicViewElement">
-				<div id="albumImage" class="musicInfoElement">
-					<img id="albumImage">
+			<div id="mainArt" class="Conteiner musicViewElement">
+				<div id="art"></div>
+			</div>
+			
+			<div id="mainInfo" class="Conteiner musicViewElement">
+				<div id="musicInfo" class="Conteiner mainInfoElement">
+					<div id="albumImage" class="musicInfoElement">
+						<img id="albumImage">
+					</div>
+					<div id="lyrics1" class="musicInfoElement">ly1</div>
+					<div id="lyrics2" class="musicInfoElement">ly2</div>
 				</div>
-				<div id="lyrics1" class="musicInfoElement">ly1</div>
-				<div id="lyrics2" class="musicInfoElement">ly2</div>
+				
+				<div id="songName" class="mainInfoElement"></div>
+				
+				<div id="musicBar" class="Conteiner mainInfoElement">
+					<audio id="audioTag" class="musicBarElement" controls></audio>
+				</div>
 			</div>
-			<div id="musicBar" class="Conteiner musicViewElement">
-				<input type="button" id="play" class="musicBarElement" onclick="mp.play();" value="Play">
-				<input type="button" id="pause" class="musicBarElement" onclick="mp.pause();" value="Pause">
-			</div>
-			<div id="songName" class="musicViewElement"></div>
 		</div>
 		
 		<div id="musicList" class="Conteiner">

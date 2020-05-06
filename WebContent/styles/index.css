@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+*{
+	font-family: sans-serif;
+}
+
 .Conteiner{
 	display: -ms-flex;
 	display: -webkit-flex;
@@ -35,14 +39,12 @@ div#header{
 }
 
 div#homeButton{
-	background-color: #8A0808;
 	color: white;
 	width: 40px;
 	background-image: url('images/home.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
-
 
 input#download{
 	color: white;
@@ -58,7 +60,6 @@ input#download{
 	color: white;
 	border: none;
 }
-
 
 input#login{
 	background-color: #555555;
@@ -86,6 +87,10 @@ label.musicSelectorLabel:hover{
 	background-color: #BDBDBD;
 }
 
+label.listLabel:hover{
+	background-color: #BDBDBD;
+}
+
 input#searchBar{
 	width: 500px;
 }
@@ -97,29 +102,33 @@ div#musicView{
 	background-color: #151515;
 }
 
-div.musicViewElement{
-	margin: 5px;
-	padding: 5px;
+div#mainArt{
+	width: 100%;
+	height: 100%;	
 }
 
-
-div#songName{
-	background-color: white;
-	border: 4px solid #2E2E2E;
-	margin-top: 0px;
+div#mainInfo{
+	width: 0;
+	height: 0;
+	flex-flow: column;
 }
 
-div#musicBar{
-	background-color: #B43104;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	flex-direction: row;
+div#art{
+	width: 40%;
+	height: 40%;
+	background-image: url('images/mainArt.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+div#mainArt{
+	align-items: center;
+	justify-content: center;
 }
 
 div#musicInfo{
-	background-color: white;
 	border: 4px solid #2E2E2E;
-	height: 70vh;
+	height: 80%;
 	margin-bottom: 0px;
 	align-items: center;
 	justify-content: space-around;
@@ -131,7 +140,42 @@ div.musicInfoElement{
 	border: 4px solid #0B2161;
 	width: 20%;
 	height: 40%;
+	background-color: #FAFAFA;
+}
+
+div#songName{
+	color: white;
+	border: 4px solid #2E2E2E;
+	margin-top: 0px;
+}
+
+div#musicBar{
 	background-color: white;
+	border: 4px solid #2E2E2E;
+	height: 35px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	flex-direction: row;
+}
+
+audio#audioTag{
+	width: 100%;
+}
+
+div#albumImage{
+	border: 0;
+	background-color: transparent;
+	width: 23%;
+	height: 43%;
+}
+
+img#albumImage{
+	border: 4px solid #0B2161;
+}
+
+img#albumImage{
+	width: 100%;
+	height: 100%
 }
 
 div#lyrics1{
@@ -144,15 +188,11 @@ div#lyrics2{
 	font-size: small;
 }
 
-img#albumImage{
-	width: 100%;
-	height: 100%
-}
 
 div#musicList{
 	flex:1 1 30%;
 	height: 100;
-	background-color: #088A08;
+	background-color: #4CAF50;
 	flex-direction: column;
 	justify-content: flex-start;
 }
@@ -161,7 +201,8 @@ div.musicListElement{
 	height: 40vh;
 	padding: 5px;
 	margin: 10px;
-	background-color: white;
+	background-color: #151515;
+	color: white;
 }
 
 .overlay{
@@ -185,7 +226,7 @@ div#downloadPopup{
 }
 
 div#downloadHeader{
-	color: #BDBDBD;
+	color: white;
 	font-size: large;
 }
 
@@ -198,7 +239,7 @@ div#downloadPopupButtons{
 }
 
 .downloadButtonsElement{
-	width: 80px;
+	width: 100px;
 	margin: 8px;
 	text-align: center;
 	color: white;
