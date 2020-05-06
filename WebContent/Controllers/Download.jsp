@@ -1,3 +1,4 @@
+<%@page import="core.User"%>
 <%@page import="core.DTOResponse"%>
 <%@page import="core.SessionManager"%>
 <%@page import="core.SubProcess"%>
@@ -9,18 +10,16 @@
     	Responde el nombre de un archivo .zip el cual contiene en su interior
     	todas las canciones que fueron solicitadas para ser descargadas.
     	
-    	Necesita el parametros files el cual debe correponder con la nomenclatura:
-    		Nombre_de_archivo1@Nombre_de_archivo2@Nombre_de_archivo3.
+    	Toma las canciones desde la session.
     
     */
     
     SessionManager sm = new SessionManager();
-    if (sm.validate(session) == UserStatus.Logged){
-    	out.print(new DTOResponse(false,"\"No Logged\""));
-    }else
+    UserStatus userStatus = sm.validate(session);
+    
+    if (userStatus != UserStatus.Logged){
+    	out.print(new DTOResponse(false,String.format("\"%s\"",userStatus)));
     	
-    if(request.getParameter("files") == null){
-    	out.print(new DTOResponse(false,"\"No Parameter\""));
     }else{
     	
     	SubProcess delete = new SubProcess(new String[]{
@@ -31,15 +30,13 @@
     			
     	});
     	delete.start();
-    	System.out.println("Deletiason");
-    	System.out.println(delete.getExitValue());
     	
-    	String[] files = request.getParameter("files").toString().trim().split("@");
+    	User user = (User) session.getAttribute("user");
     	
     	StringBuilder result = new StringBuilder("");
     	
     	
-    	for(String file: files){
+    	for(String file: user.downloadList){
 	    	SubProcess listFiles = new SubProcess(new String[]{
 	    			"sh",
 	    			"Model/run.sh",
