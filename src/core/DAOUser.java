@@ -91,6 +91,7 @@ public class DAOUser {
 		System.out.println(br.lines().collect(Collectors.joining("\n")));
 		*/
 		DAOUser um = new DAOUser();
+		System.out.println(um.isRegistred("Admin"));
 		System.out.println(um.register("Moisess", "Gomeza"));
 		System.out.println(um.register("Holas", "Mundos"));
 		System.out.println(um.register("Juan", "Pedro"));

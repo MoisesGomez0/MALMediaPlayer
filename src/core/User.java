@@ -1,5 +1,6 @@
 package core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** Representación de usuario  */
@@ -11,16 +12,29 @@ public class User {
 	private String password;
 	
 	/***/
-	public List<String> downloadList;
+	private ArrayList<String> downloadList = new ArrayList<>();
 	
+	public ArrayList<String> getDownloadList() {
+		return downloadList;
+	}
+
+	public void setDownloadList(ArrayList<String> downloadList) {
+		this.downloadList = downloadList;
+	}
+
 	public User(String name) {
 		this.name = name;
+	}
+	
+	public User(String name, String password, ArrayList<String> downloadList) {
+		this.name = name;
+		this.password = password;
+		this.downloadList = downloadList;
 	}
 	
 	public User(String name, String password) {
 		this.name = name;
 		this.password = password;
-		this.downloadList = downloadList;
 	}
 	
 	/**

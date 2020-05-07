@@ -2,12 +2,14 @@
 
 *{
 	font-family: sans-serif;
+
 }
 
 .Conteiner{
 	display: -ms-flex;
 	display: -webkit-flex;
 	display: flex;
+	position: relative;
 }
 
 div#main{
@@ -81,6 +83,7 @@ div#musicSelector{
 	overflow-y: scroll;
 	overflow-x: scroll;
 	position: fixed;	
+	white-space: nowrap;
 }
 
 label.musicSelectorLabel:hover{
@@ -141,6 +144,9 @@ div.musicInfoElement{
 	width: 20%;
 	height: 40%;
 	background-color: #FAFAFA;
+	
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 div#songName{

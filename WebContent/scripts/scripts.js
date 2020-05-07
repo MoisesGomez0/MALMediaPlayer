@@ -14,6 +14,7 @@ function SearchBarManager(){
 		obj.style.zIndex = 1; /**Muestra el objeto*/
 		this.songList = []; /**Limpia la lista de canciones.*/
 		obj.innerHTML = ""; /**Empieza sin valores*/
+		
 		for (let song of data.message.songs) { /**Agrega todas las canciones encontradas por el servidor.**/
 			let artist = song.artist;
 			let album = song.album;
@@ -51,6 +52,7 @@ function SearchBarManager(){
 			console.log((dm.downloadList.length == 0 || !dm.downloadList.includes(fileName)) && checked);
 			
 			dm.downloadList.push(fileName);
+			$.post("Controllers/DownloadList.jsp",{"add": fileName},null);
 
 			console.log(dm.downloadList);
 		}
@@ -63,6 +65,7 @@ function SearchBarManager(){
 			console.log((dm.downloadList.length == 0 || !dm.downloadList.includes(fileName)) && checked);
 			
 			dm.downloadList.splice(dm.downloadList.indexOf(fileName),1); /**Elimina la canción de la lista de descargas. */
+			$.post("Controllers/DownloadList.jsp",{"del": filename},null);
 
 			console.log(dm.downloadList);
 		}
@@ -151,6 +154,8 @@ function MusicListManager(){
  */
 function ViewManager(){
 	this.musicName = "";
+
+	var loadingGifPath = "styles/images/loading.gif"
 	
 	this.homeAction = function(){
 		var mainInfo = document.querySelector("div#mainInfo");
@@ -193,8 +198,6 @@ function ViewManager(){
 		var songName = name.split("_")[2];
 		var artistName = name.split("_")[0];
 		var albumName = name.split("_")[1];
-
-		this.showInfo();
 		
 		this.musicName = `${artistName} - ${albumName} - ${songName}`; /**Obtiene el nombre completo de la canción.*/
 		musicNameDiv.innerHTML = this.musicName; /**Agrega el nombre al div correspondidente.*/
@@ -202,10 +205,12 @@ function ViewManager(){
 		console.group("Requests")
 		/**Petición de las lyrics1.*/
 		lyrics1Div.innerHTML = "";/**Limpia el contenido de lyrics1.*/
+		lyrics1Div.style.backgroundImage = `url('${loadingGifPath}')`;
 		$.post("Controllers/StaticLyric.jsp",{"songName": songName, "albumName": albumName, "artist": artistName},function(data){
 			try {
 				console.group("lyrics1");
 				data = JSON.parse(`${data}`.trim());
+				lyrics1Div.style.backgroundImage = "";
 				lyrics1Div.innerHTML = data.message; /**Agrega las lyrics al div correspondiente.*/	
 				console.log(data);
 			} catch (e) {
@@ -220,10 +225,12 @@ function ViewManager(){
 
 		/**Petición de las lyrics2*/
 		lyrics2Div.innerHTML = "";/**Limpia el contenido de lyrics2.*/
+		lyrics2Div.style.backgroundImage = `url('${loadingGifPath}')`; /** */
 		$.post("Controllers/APILyric.jsp",{"songName": songName, "albumName": albumName, "artist": artistName},function(data){
 			try {
 				console.group("lyrics2");
 				data = JSON.parse(`${data}`.trim());
+				lyrics2Div.style.backgroundImage = ""; /** */
 				lyrics2Div.innerHTML = data.message.body.lyrics.lyrics_body; /**Agrega las lyrics al div correspondiente.*/	
 				console.log(data);
 			} catch (e) {
@@ -259,6 +266,8 @@ function ViewManager(){
 			console.log("Imagen del álbum cargadas correctamente.");
 			console.groupEnd();
 		});
+
+		this.showInfo();
 		
 		return false;
 	}

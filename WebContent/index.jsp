@@ -1,6 +1,18 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="core.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%
+
+ArrayList<String> a = new ArrayList<>();
+a.add("banana");
+a.add("Guineo");
+a.add("Arturo Sandoval_Trumpet Evolution_La virgen de la Macarena.mp3");
+
+User user = new User("Admin","Root",a);
+session.setAttribute("user", user);
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +63,7 @@
 			</div>
 			
 			<div id="mainInfo" class="Conteiner musicViewElement">
+				<div id="songName" class="mainInfoElement"></div>
 				<div id="musicInfo" class="Conteiner mainInfoElement">
 					<div id="albumImage" class="musicInfoElement">
 						<img id="albumImage">
@@ -59,10 +72,8 @@
 					<div id="lyrics2" class="musicInfoElement">ly2</div>
 				</div>
 				
-				<div id="songName" class="mainInfoElement"></div>
-				
 				<div id="musicBar" class="Conteiner mainInfoElement">
-					<audio id="audioTag" class="musicBarElement" controls></audio>
+					<audio id="audioTag" class="musicBarElement" controls autoplay></audio>
 				</div>
 			</div>
 		</div>

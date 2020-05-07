@@ -36,20 +36,22 @@
 	    		
 	    	switch(action){
 	    	case "add":
-	    		user.downloadList.add(name);
+	    		user.getDownloadList().add(name);
+	    		session.setAttribute("user", user);
 	    		out.print(new DTOResponse(true,"\"Added\""));
 	    		break;
 	    	case "del":
-	    		for(int i=0; i < user.downloadList.size(); i++ ){
-	    			if( user.downloadList.get(i).equals(name) ){
-	    				user.downloadList.remove(i);
+	    		for(int i=0; i < user.getDownloadList().size(); i++ ){
+	    			if( user.getDownloadList().get(i).equals(name) ){
+	    				user.getDownloadList().remove(i);
+	    				session.setAttribute("user", user);
 	    	    		out.print(new DTOResponse(true,"\"Deleted\""));
 	    			}
 	    		}    		
 	    	}
     	}else if(action == "clear"){
-			user.downloadList.clear();
-    	
+			user.getDownloadList().clear();
+			session.setAttribute("user", user);
     	}else{
     		out.print(new DTOResponse(false,"\"No avaiable parameter\""));
     	}
