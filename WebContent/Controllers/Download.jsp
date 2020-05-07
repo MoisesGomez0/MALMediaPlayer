@@ -38,7 +38,7 @@
     	System.out.println(user);
     	StringBuilder result = new StringBuilder("");
     	System.out.println(5);
-    	System.out.println(user.getPassword());
+    	System.out.println(user.getDownloadList());
     	
     	for(String file: user.getDownloadList()){
     		System.out.println(6);

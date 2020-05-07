@@ -1,16 +1,17 @@
+<%@page import="core.SessionManager"%>
+<%@page import="core.UserStatus"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="core.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 
-ArrayList<String> a = new ArrayList<>();
-a.add("banana");
-a.add("Guineo");
-a.add("Arturo Sandoval_Trumpet Evolution_La virgen de la Macarena.mp3");
-
-User user = new User("Admin","Root",a);
+SessionManager sm = new SessionManager();
+if(sm.validate(session) != UserStatus.Logged){
+User user = new User("Admin","Root");
 session.setAttribute("user", user);
+	
+}
 
 %>
 <!DOCTYPE html>
@@ -35,7 +36,7 @@ session.setAttribute("user", user);
 </script>
 
 </head>
-<body onload="mlm.albumsData(); mlm.artistsData();">
+<body onload="mlm.albumsData(); mlm.artistsData(); dm.loadDownloadList();">
 	
 	<div id="musicSelector"></div>
 	

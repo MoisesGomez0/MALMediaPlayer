@@ -52,8 +52,7 @@ function SearchBarManager(){
 			console.log((dm.downloadList.length == 0 || !dm.downloadList.includes(fileName)) && checked);
 			
 			dm.downloadList.push(fileName);
-			$.post("Controllers/DownloadList.jsp",{"add": fileName},null);
-
+			$.post("Controllers/DownloadList.jsp",{"action": "add", "name": fileName},null);
 			console.log(dm.downloadList);
 		}
 		console.groupEnd();
@@ -65,7 +64,7 @@ function SearchBarManager(){
 			console.log((dm.downloadList.length == 0 || !dm.downloadList.includes(fileName)) && checked);
 			
 			dm.downloadList.splice(dm.downloadList.indexOf(fileName),1); /**Elimina la canción de la lista de descargas. */
-			$.post("Controllers/DownloadList.jsp",{"del": filename},null);
+			$.post("Controllers/DownloadList.jsp",{"action": "del", "name": fileName},null);
 
 			console.log(dm.downloadList);
 		}
@@ -251,9 +250,13 @@ function ViewManager(){
 			try {
 				console.group("Play");
 				data = JSON.parse(`${data}`.trim());
+
 				if (data.message.albumPath){
 					albumImage.src = data.message.albumPath; /**Agrega la dirección donde se encuentra la imagen*/
+				}else{
+					albumImage.src = "styles/images/defaultAlbum.jpg";
 				}
+
 				audio.src = data.message.songPath;
 				console.log(data);
 				console.log(audio.src);
@@ -281,30 +284,6 @@ function MusicPlayer(){
 	
 	this.audio = new Audio();
 	
-	this.play = function(obj = document.querySelector("img#playButton")){
-		var icon = obj.src;
-
-		var playIconPath = "http://localhost:8080/MALMediaPlayer/styles/images/playIcon.png";
-		var pauseIconPath = "http://localhost:8080/MALMediaPlayer/styles/images/pauseIcon.png";
-
-		console.group("MusicPlayer");
-		console.log(`Icon: ${icon}`);
-		console.log(this.audio.src)
-		console.groupEnd();
-
-		if (icon == playIconPath && this.audio.src){/**Está en pause. */
-			obj.src = pauseIconPath; /**Cambia a play. */
-			this.audio.play();
-
-		}else if(icon == pauseIconPath && this.audio.src){ /**Está en play. */
-			obj.src = playIconPath; /**Cambia a pause */
-			this.audio.pause();
-		}
-
-		
-		return false;
-	}
-	
 }
 
 /**
@@ -316,11 +295,14 @@ function DownloadManager(){
 	this.showDownloadList = function(obj = document.querySelector("div#downloadList")) {
 		var overlay = document.querySelector("div#overlayDownload"); /**Div que contiene la lista.*/
 		obj.innerHTML = ""; /**Limpia el contenedor de la lista. */
+
 		for (let fileName of this.downloadList) { /**Agrega todas las canciones en la lista de descarga.**/
 			
 			obj.innerHTML += `<input type="checkbox" onchange="sbm.checkBoxAction(this);" id="${fileName}" value="${fileName}" checked>`
 			obj.innerHTML += `<label id="${fileName}" class="musicSelectorLabel" onclick="console.log(this.id);vm.setInfo(this.id);"> ${fileName}</label><br>`
 		}
+
+
 		
 		overlay.style.zIndex = 2;
 		return false;
@@ -329,6 +311,19 @@ function DownloadManager(){
 	this.hideDownloadList = function() {
 		var overlay = document.querySelector("div#overlayDownload"); /**Div que contiene la lista.*/
 		overlay.style.zIndex = -1;
+		return false;
+	}
+
+	this.loadDownloadList = function(listStr){
+
+		$.post("Controllers/DownloadList.jsp",{"action": "get"},function(data){
+			console.group("loadDownList");
+			data = JSON.parse(`${data}`.trim());
+			console.log(data);
+			dm.downloadList = data.message.split("@");
+			console.groupEnd();
+		});
+
 		return false;
 	}
 

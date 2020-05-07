@@ -64,9 +64,9 @@ public class Lyric {
 			return this.cleanWebStaticContent(this.webResponse);
 			
 		} catch (MalformedURLException e) {
-			return new DTOResponse(false, "\"Bad request\"").toString();
+			return  "\"Bad request\"";
 		} catch (IOException e) {
-			return new DTOResponse(false, "\"Bad responce\"").toString();
+			return "\"Lyrics not found.\"";
 		}
 	}
 	

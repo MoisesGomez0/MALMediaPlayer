@@ -29,7 +29,7 @@
     	
     	String action = request.getParameter("action").toString().trim();
     	
-    	if((action == "add" || action == "del") &&
+    	if((action.equals("add") || action.equals("del")) &&
     			request.getParameter("name") != null){
     		
 	    	String name = request.getParameter("name").toString().trim();
@@ -49,10 +49,27 @@
 	    			}
 	    		}    		
 	    	}
-    	}else if(action == "clear"){
+    	}else if(action.equals("clear")){
 			user.getDownloadList().clear();
 			session.setAttribute("user", user);
-    	}else{
+    	}else if(action.equals("get")){
+    		
+    		StringBuilder result = new StringBuilder("");
+    		for(int i=0; i<user.getDownloadList().size() - 1; i++){
+    			result.append(
+    					String.format("%s@",
+    							user.getDownloadList().get(i)
+    							)
+    					);
+    		}
+    		result.append(user.getDownloadList().get(
+    				user.getDownloadList().size() - 1
+    				)
+    			);
+    		out.print(new DTOResponse(true, String.format("\"%s\"",result.toString())));
+    		
+    	} 	
+    	else{
     		out.print(new DTOResponse(false,"\"No avaiable parameter\""));
     	}
     	
