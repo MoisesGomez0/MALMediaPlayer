@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://lyric" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://lyric" xmlns:intf="http://lyric" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://lyric" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getAPILyric">
+    <complexType>
+     <sequence>
+      <element name="songName" type="xsd:string"/>
+      <element name="artistName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAPILyricResponse">
+    <complexType>
+     <sequence>
+      <element name="getAPILyricReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getStaticLyric">
+    <complexType>
+     <sequence>
+      <element name="songName" type="xsd:string"/>
+      <element name="artistName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getStaticLyricResponse">
+    <complexType>
+     <sequence>
+      <element name="getStaticLyricReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getAPILyricResponse">
+
+      <wsdl:part element="impl:getAPILyricResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getStaticLyricResponse">
+
+      <wsdl:part element="impl:getStaticLyricResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAPILyricRequest">
+
+      <wsdl:part element="impl:getAPILyric" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getStaticLyricRequest">
+
+      <wsdl:part element="impl:getStaticLyric" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="DAOLyric">
+
+      <wsdl:operation name="getAPILyric">
+
+         <wsdl:input message="impl:getAPILyricRequest" name="getAPILyricRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAPILyricResponse" name="getAPILyricResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getStaticLyric">
+
+         <wsdl:input message="impl:getStaticLyricRequest" name="getStaticLyricRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getStaticLyricResponse" name="getStaticLyricResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="DAOLyricSoapBinding" type="impl:DAOLyric">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getAPILyric">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAPILyricRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAPILyricResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getStaticLyric">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getStaticLyricRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getStaticLyricResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="DAOLyricService">
+
+      <wsdl:port binding="impl:DAOLyricSoapBinding" name="DAOLyric">
+
+         <wsdlsoap:address location="http://localhost:8080/LyricsWebService/services/DAOLyric"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
