@@ -405,7 +405,18 @@ function DownloadManager(){
 		});
 
 	}
+}
 
+function ModelManager(){
+	
+	this.hide = function(selector = "div#overlayAbout"){
+		document.querySelector(selector).style.zIndex = -1;
+	}
 
+	this.show = function(selector = "div#overlayAbout"){
+		document.querySelector(selector).style.zIndex = 2;
+	}
+	
+	
 }
 

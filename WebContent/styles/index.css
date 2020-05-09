@@ -107,13 +107,27 @@ div#musicView{
 
 div#mainArt{
 	width: 100%;
-	height: 100%;	
+	height: 100%;
+	flex-direction: column;	
 }
 
-div#mainInfo{
-	width: 0;
-	height: 0;
-	flex-flow: column;
+div#aboutButton{
+	align-self: initial;
+}
+
+label#showAbout{
+	color: #555555;
+}
+
+label#showAbout:hover{
+	color: #00BFFF;
+}
+
+div#artConteiner{
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
 }
 
 div#art{
@@ -124,10 +138,12 @@ div#art{
     background-size: contain;
 }
 
-div#mainArt{
-	align-items: center;
-	justify-content: center;
+div#mainInfo{
+	width: 0;
+	height: 0;
+	flex-flow: column;
 }
+
 
 div#infoButtons{
 	width: 100%;
@@ -251,6 +267,24 @@ div.musicListElement{
 	align-items: center;
 	justify-content: center;
 	z-index: -1;	
+}
+
+div#aboutPopup{
+	width: 40%;
+	background-color: white;
+	align-items: center;
+	flex-direction: column;
+}
+
+.aboutPopupElement{
+	margin: 4px;
+	padding: 4px;
+}
+
+div#aboutBody{
+	height: 20%;
+	flex-direction: column;
+	border: 4px solid orange;
 }
 
 div#downloadPopup{

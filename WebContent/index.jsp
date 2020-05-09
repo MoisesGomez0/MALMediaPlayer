@@ -32,6 +32,7 @@ session.setAttribute("user", user);
 	var mp = new MusicPlayer();
 	var vm = new ViewManager();
 	var dm = new DownloadManager();
+	var mm = new ModelManager();
 	
 </script>
 
@@ -60,7 +61,10 @@ session.setAttribute("user", user);
 		
 		<div id="musicView" class="Conteiner">
 			<div id="mainArt" class="Conteiner musicViewElement">
-				<div id="art"></div>
+				<div id="aboutButton" class="mainArtElement"><label id="showAbout" onclick="mm.show();">About</label></div>
+				<div id="artConteiner" class="Conteiner mainArtElement">
+					<div id="art"></div>
+				</div>
 			</div>
 			
 			<div id="mainInfo" class="Conteiner musicViewElement">
@@ -93,26 +97,28 @@ session.setAttribute("user", user);
 		</div>
 	</div>
 	
-	<div id=overlayLogin class="Conteiner overlay">
-		<div id="loginPopup" class="Conteiner overlayLoginElement">
-			<h3 id="loginHeader" class="loginPopupElement">Inicia Sesión</h3>
+	<div id="overlayAbout" class="Conteiner overlay">
+		<div id="aboutPopup" class="Conteiner overlayAboutElement">
+			<div id="aboutHeader" class="aboutPopupElement">Créditos:</div>
 			
-			<div id="inputLoginPopup" class="Conteiner loginPopupElement">
-				<input type="text" id="loginName" class="inputLoginPopupElement" placeholder="Nombre de usuario.">
-				<input type="text" id="loginPassword" class="inputLoginPopupElement" placeholder="Contraseña.">
+			<div id="aboutBody" class="Conteiner aboutPopupElement">
+				<label class="aboutBodyElement">Ana Hernández</label><br>
+				<label class="aboutBodyElement">Moisés Gómez</label><br>
+				<label class="aboutBodyElement">Leonardo Mass</label><br>
 			</div>
 			
-			<div id="errorLoginPopup" class="loginPopupElement">El usuario o contraseña es incorrecto.</div>
+			<label class="aboutPopupElement">Clase: Programación Orientada a Objetos.</label><br>
+			<label class="aboutPopupElement">Sección: 0800</label><br>
+			<label class="aboutPopupElement">Año: 2020</label><br>
+			<label class="aboutPopupElement">PAC-I</label><br>
+			<label class="aboutPopupElement">Catedrático: José Inestroza.</label><br>
 			
-			<div id="buttonsLoginPopup" class="Conteiner loginPopupElement">
-				<input type="button"  id="cancelLogin" class="loginPopupElement" value="Cancelar">
-				<input type="button"  id="aceptLogin" class="loginPopupElement" value="Aceptar">
-			</div>
+			<input type="button" onclick="mm.hide();" value="Close">
 		</div>
-	</div>	
+	</div>
 	
-	<div id=overlayDownload class="Conteiner overlay">
-		<div id=downloadPopup class="Conteiner overlayDownloadElement">
+	<div id="overlayDownload" class="Conteiner overlay">
+		<div id="downloadPopup" class="Conteiner overlayDownloadElement">
 			<div id="downloadHeader" class="downloadPopupElement">Lista de descarga.</div>
 			
 			<div id="downloadList" class="downloadPopupElement"></div>
