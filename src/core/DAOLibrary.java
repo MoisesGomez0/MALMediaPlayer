@@ -1,6 +1,7 @@
 package core;
 
-/** Objeto encargado al acceso a las canciones que existan en el servidor */
+/** Objeto encargado al acceso a las canciones que existan en el servidor, están deben están dentro
+ * de la carpeta Library en el Tomcat Path */
 public class DAOLibrary {
 	
 	/**
@@ -19,6 +20,7 @@ public class DAOLibrary {
 	 * Encargado de ejecutar un sub proceso obtener el resultado de este y 
 	 * escribir un String que represente un JSON con el estado y resultado del
 	 * sub proceso
+	 * @param subProcess Subproceso a ejecutar.
 	 * */
 	private String response(SubProcess subProcess) {
 		
@@ -58,6 +60,11 @@ public class DAOLibrary {
 		return this.response(sp);
 	}
 	
+	
+	/**
+	 * Retorna una ruta relativa del la canción que se pase como parámetros.
+	 * @param name Nombre de la canción de la que se quiere la ruta relativa.
+	 * */
 	public String getPath(String name) {
 		SubProcess sp = new SubProcess(new String[]{
     			"sh",
@@ -69,18 +76,5 @@ public class DAOLibrary {
     	return sp.getResult();
 	}
 	
-	/*
-	 * Pruebas con la clase.
-	 * */
-	
-	public static void main(String[] args) {
-		System.out.println(new DAOLibrary().search("a"));
-		/*
-		System.out.println( new DAOLibrary().getAllSongs());
-		System.out.println(new DAOLibrary().search("hola"));
-		System.out.println(new DAOLibrary().getAllAlbums());
-		System.out.println(new DAOLibrary().getAllArtists());*/
-		//System.out.println(new DAOLibrary().getPath("*asdf*"));
-	}
 	
 }

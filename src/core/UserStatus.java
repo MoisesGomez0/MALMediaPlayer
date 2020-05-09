@@ -1,5 +1,6 @@
 package core;
 
+/** Usado para representar los posibles estados de un usuario. */
 public enum UserStatus {
 	/** Usuario ya registrado */
 	AlreadyRegistered,

@@ -73,16 +73,10 @@ public class DAOStaticLyric{
 	 * @return Letra de la canción en formato HTML
 	 * */
 	private String cleanWebStaticContent(String response) {
-		System.out.println(5);
 
 		return response.replaceAll(
 		"([\\s\\S]+(<p id=\"songLyricsDiv\"  class=\"songLyricsV14 iComment-text\">))|((<br \\/><\\/p>)[\\s\\S]+)",
 				"");
 	}
 	
-	public static void main(String[] args){
-		DAOStaticLyric l = new DAOStaticLyric(new Song("My way","hola","Frank Sinatra"));
-	    
-	    System.out.println(l.getLyric());
-	}
 }	

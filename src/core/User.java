@@ -1,7 +1,6 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /** Representación de usuario  */
 public class User {

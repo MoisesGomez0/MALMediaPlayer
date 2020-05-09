@@ -30,7 +30,7 @@
 getopts ":f:aAsg:r:c:F:d:D:" optname
     case "$optname" in
         "f")
-            ls -1R Library/ | grep "$OPTARG" | python3 Model/SearchProcessor.py "$OPTARG"
+            ls -1R Library/ | grep -i "$OPTARG" | python3 Model/SearchProcessor.py "$OPTARG"
         ;;
         "a")
             ls -1R Library/ | python3 Model/AlbumsProcessor.py

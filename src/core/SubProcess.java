@@ -81,10 +81,12 @@ public class SubProcess {
 	 * 
 	 *  */
 	public int start() {
-		this.result = null;
-		this.exitValue = -2000; 
-		builder = new ProcessBuilder(commands);
+		//Limpiar datos por un posible subproceso previo.
 		this.result = "";
+		this.exitValue = -2000; 
+		
+		builder = new ProcessBuilder(commands);
+		
 		try {
 			process = builder.start();
 			this.exitValue = process.waitFor();
@@ -102,9 +104,4 @@ public class SubProcess {
 		}
 	}
 	
-	public static void main(String[] args) {
-		SubProcess sp = new SubProcess(new String[] {"ls","-l"});
-		sp.start();
-		System.out.println(sp.getResult());
-	}
 }
