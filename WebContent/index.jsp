@@ -51,9 +51,8 @@ session.setAttribute("user", user);
 					<input type="button" id="download" class="inputElement" onclick="dm.showDownloadList();" value="Download" >
 				</div>
 				
-				<div id="sessionButtons" class="Conteiner headerElement">
-					<input type="button" id="login" class="sessionButtonsElement" value="Log In" >
-			 		<input type="button" id="signin" class="sessionButtonsElement" value="Sign In" >
+				<div id="webApp" class="Conteiner headerElement">
+					<input type="button" id="webApp" class="webAppElement" onclick="window.location='http://localhost:8080/LyricsWebServiceClient/'" value="Other Lyrics" >
 				</div>
 			 		
 			</div>
@@ -92,7 +91,10 @@ session.setAttribute("user", user);
 		</div>
 		
 		<div id="musicList" class="Conteiner">
-			<div id="artists" class="musicListElement"></div>
+		<h2>Artistas</h2>
+			<div id="artists" class="musicListElement">
+			</div>
+		<h2>Álbumes</h2>
 			<div id="albums" class="musicListElement"></div>		
 		</div>
 	</div>
