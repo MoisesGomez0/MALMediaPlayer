@@ -104,9 +104,9 @@ session.setAttribute("user", user);
 			<div id="aboutHeader" class="aboutPopupElement">Créditos:</div>
 			
 			<div id="aboutBody" class="Conteiner aboutPopupElement">
-				<label class="aboutBodyElement">Ana Hernández</label><br>
-				<label class="aboutBodyElement">Moisés Gómez</label><br>
-				<label class="aboutBodyElement">Leonardo Mass</label><br>
+				<label class="aboutBodyElement">Ana Évelin Hernández Martínez 20171001620</label><br>
+				<label class="aboutBodyElement">Moisés David Gómez Amador 20181001683</label><br>
+				<label class="aboutBodyElement">Leonardo Mass Sosa 20171031716</label><br>
 			</div>
 			
 			<label class="aboutPopupElement">Clase: Programación Orientada a Objetos.</label><br>
@@ -121,7 +121,7 @@ session.setAttribute("user", user);
 	
 	<div id="overlayDownload" class="Conteiner overlay">
 		<div id="downloadPopup" class="Conteiner overlayDownloadElement">
-			<div id="downloadHeader" class="downloadPopupElement">Lista de descarga.</div>
+			<div id="downloadHeader" class="downloadPopupElement"><Strong>Lista de descarga</Strong></div>
 			
 			<div id="downloadList" class="downloadPopupElement"></div>
 			

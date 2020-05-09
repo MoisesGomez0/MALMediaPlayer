@@ -91,7 +91,7 @@ div#musicView {
 	width: 70%;
 	flex-flow: column;
 	height: 100vh;
-	background-color: rgba(180,49,245,0.7);
+	background-color: #ac06e5;
 }
 
 div#mainArt {
@@ -169,6 +169,8 @@ div.musicInfoElement {
 div#songName {
 	color: white;
 	margin-top: 0px;
+	font-size: large;
+	font-weight: bold;
 }
 
 div#musicBar {
@@ -229,14 +231,15 @@ div#musicList {
 	background-color: TAN;
 	flex-direction: column;
 	justify-content: flex-start;
+	background-color: #afe506;
 }
 
 div.musicListElement {
 	height: 30%;
 	padding: 5px;
 	margin: 10px;
-	background-color: rgba(46, 139, 232, 0.8);
-	color: white;
+	background-color: #e5ac06;
+	color: black;
 	overflow-y: scroll;
 	overflow-x: scroll;
 	white-space: nowrap;
@@ -260,26 +263,31 @@ div#aboutPopup {
 	background-color: white;
 	align-items: center;
 	flex-direction: column;
+	border-radius: 2%;
+	padding: 3%;
 }
 
 .aboutPopupElement {
 	margin: 4px;
 	padding: 4px;
+	border-radius: 2%;
 }
 
 div#aboutBody {
 	height: 20%;
+	border-radius: 2%;
 	flex-direction: column;
-	border: 4px solid orange;
 }
 
 div#downloadPopup {
 	height: 90vh;
 	width: 40vw;
-	background-color: #151515;
+	background-color: rgb(229, 6, 63);
 	flex-direction: column;
 	align-items: center;
+	border-radius: 2%;
 }
+
 
 div#downloadHeader {
 	color: white;
