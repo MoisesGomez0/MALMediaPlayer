@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+*{
+	font-family: sans-serif;
+	
+}
+
+.Conteiner{
+	display: -ms-flex;
+	display: -webkit-flex;
+	display: flex;
+}
+
+div#main{
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: fuchsia;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+}
+
+.mainElement {
+	border-radius: 5%;
+	height: 90%;
+	width: 40%;
+	background-color: white;
+	border: 4px solid gray;
+	flex-direction: column;
+	align-items: center;
+}
+
+div#lyrics{
+	background-color: aqua;
+	width: 90%;
+	height: 90%;
+	flex-flow: row;
+	align-items: stretch;
+}
+
+.lyricsElement{
+	height: 20%;
+	border: 4px solid navy;
+	background-color: white;
+	overflow-y: scroll; 
+}
