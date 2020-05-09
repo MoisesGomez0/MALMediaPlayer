@@ -154,15 +154,16 @@ function MusicListManager(){
 function ViewManager(){
 	this.musicName = "";
 
-	var loadingGifPath = "styles/images/loading.gif"
+	this.loadingGifPath = "styles/images/loading.gif"
 	
-	this.homeAction = function(){
+	this.closeInfo = function(){
 		var mainInfo = document.querySelector("div#mainInfo");
 		var mainArt = document.querySelector("div#mainArt");
 		var audio = document.querySelector("audio#audioTag");
+
 		audio.pause();
 		audio.src = "";
-
+		
 		mainInfo.style.width = 0;
 		mainInfo.style.height = 0;
 
@@ -170,6 +171,11 @@ function ViewManager(){
 		mainArt.style.height = "100%";
 
 		return false;
+	}
+
+	this.homeAction = function(){
+		this.closeInfo();
+		mp.clearList(); /**Elimina la lista de canciones seleccionadas. */
 	}
 
 	this.showInfo = function(){
@@ -185,12 +191,14 @@ function ViewManager(){
 		return false;
 	}
 
+
 	/**Carga la información de la canción a los divs correspondientes.*/
 	this.setInfo = function(fileName){
 		var musicNameDiv = document.querySelector("div#songName");
 		var albumImage = document.querySelector("img#albumImage");
 		var lyrics1Div = document.querySelector("div#lyrics1");
 		var lyrics2Div = document.querySelector("div#lyrics2");
+
 		var audio = document.querySelector("audio#audioTag");
 
 		var name = fileName.replace(".mp3","");
@@ -204,7 +212,7 @@ function ViewManager(){
 		console.group("Requests")
 		/**Petición de las lyrics1.*/
 		lyrics1Div.innerHTML = "";/**Limpia el contenido de lyrics1.*/
-		lyrics1Div.style.backgroundImage = `url('${loadingGifPath}')`;
+		lyrics1Div.style.backgroundImage = `url('${this.loadingGifPath}')`;
 		$.post("Controllers/StaticLyric.jsp",{"songName": songName, "albumName": albumName, "artist": artistName},function(data){
 			try {
 				console.group("lyrics1");
@@ -224,13 +232,17 @@ function ViewManager(){
 
 		/**Petición de las lyrics2*/
 		lyrics2Div.innerHTML = "";/**Limpia el contenido de lyrics2.*/
-		lyrics2Div.style.backgroundImage = `url('${loadingGifPath}')`; /** */
+		lyrics2Div.style.backgroundImage = `url('${this.loadingGifPath}')`; /** */
 		$.post("Controllers/APILyric.jsp",{"songName": songName, "albumName": albumName, "artist": artistName},function(data){
 			try {
 				console.group("lyrics2");
 				data = JSON.parse(`${data}`.trim());
 				lyrics2Div.style.backgroundImage = ""; /** */
-				lyrics2Div.innerHTML = data.message.body.lyrics.lyrics_body; /**Agrega las lyrics al div correspondiente.*/	
+				if (data.message.header.status_code == 404){
+					lyrics2Div.innerHTML = "Lyrics not found.";
+				}else{
+					lyrics2Div.innerHTML = data.message.body.lyrics.lyrics_body; /**Agrega las lyrics al div correspondiente.*/	
+				}
 				console.log(data);
 			} catch (e) {
 				console.error("Fallo en la carga de las lyrics2.");
@@ -244,8 +256,9 @@ function ViewManager(){
 		});
 		
 		/**Petición de la imagen del album y el archivo mp3 de la canción.*/
-		albumImage.src="";
+		albumImage.src = this.loadingGifPath;
 		audio.src=""; /**Limpia el audio. */
+		mp.setCurrent(fileName);
 		$.post("Controllers/Play.jsp",{"fileName": fileName},function(data){
 			try {
 				console.group("Play");
@@ -258,10 +271,12 @@ function ViewManager(){
 				}
 
 				audio.src = data.message.songPath;
+
+
 				console.log(data);
 				console.log(audio.src);
 			} catch (e) {
-				console.error("Fallo en la carga de la imagen del álbum");
+				console.error("Fallo en la carga de la imagen del álbum o audio");
 				console.log(data);
 				console.groupEnd();
 			}
@@ -281,9 +296,52 @@ function ViewManager(){
  * @returns
  */
 function MusicPlayer(){
+
+	this.musicList = [];
+	this.current = "";
+	var audio = document.querySelector("audio#audioTag");
+
+	console.group("Controls");
+	this.setCurrent = function(current){
+		console.log(`SetCurrent: ${current}`);
+		if (!this.musicList.includes(current)){
+			this.musicList.push(current);
+		}
+		this.current = current;
+		console.log(`list: ${this.musicList}`);
+
+	}
+
+	this.previous = function(){
+		console.log(`Prev: ${musicList}`);
+		if (this.musicList.length > 1 && this.musicList.indexOf(this.current) != 0){
+			console.log("dentro");
+			this.current = this.musicList[this.musicList.indexOf(this.current) - 1];
+			vm.setInfo(this.current);
+			vm.showInfo();
+
+		}
+	}
 	
-	this.audio = new Audio();
-	
+	this.next = function() {
+		console.log(`Next: ${musicList}`);
+		if (this.musicList.length > 1 && this.musicList.indexOf(this.current) != this.musicList.length - 1){
+			console.log("dentro");
+			this.current = this.musicList[this.musicList.indexOf(this.current) + 1];
+			vm.setInfo(this.current);
+			vm.showInfo();
+		}
+
+	}
+
+	/**
+	 * Limpia la lista de reproducción
+	 */
+	this.clearList = function() {
+		this.musicList = [];
+	}
+
+	console.groupEnd();
 }
 
 /**
@@ -301,8 +359,6 @@ function DownloadManager(){
 			obj.innerHTML += `<input type="checkbox" onchange="sbm.checkBoxAction(this);" id="${fileName}" value="${fileName}" checked>`
 			obj.innerHTML += `<label id="${fileName}" class="musicSelectorLabel" onclick="console.log(this.id);vm.setInfo(this.id);"> ${fileName}</label><br>`
 		}
-
-
 		
 		overlay.style.zIndex = 2;
 		return false;
@@ -352,11 +408,4 @@ function DownloadManager(){
 
 
 }
-
-function SessionManager(){
-	this.showLoginPopup = function(){
-		
-	}
-}
-
 

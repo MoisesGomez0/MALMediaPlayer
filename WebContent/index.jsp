@@ -64,7 +64,11 @@ session.setAttribute("user", user);
 			</div>
 			
 			<div id="mainInfo" class="Conteiner musicViewElement">
-				<div id="songName" class="mainInfoElement"></div>
+				
+				<div id="infoButtons" class="Conteiner mainInfoElement">
+					<div id="closeInfo" class="infoButtonsElement"><label id="closeInfo" onclick="vm.closeInfo();">x</label></div>
+				</div>
+				
 				<div id="musicInfo" class="Conteiner mainInfoElement">
 					<div id="albumImage" class="musicInfoElement">
 						<img id="albumImage">
@@ -73,7 +77,11 @@ session.setAttribute("user", user);
 					<div id="lyrics2" class="musicInfoElement">ly2</div>
 				</div>
 				
+				<div id="songName" class="mainInfoElement"></div>
+				
 				<div id="musicBar" class="Conteiner mainInfoElement">
+					<div id="previousButton" class="musicBarElement ctrlButtons" onclick="mp.previous();"></div>
+					<div id="nextButton" class="musicBarElement ctrlButtons" onclick="mp.next();"></div>
 					<audio id="audioTag" class="musicBarElement" controls autoplay></audio>
 				</div>
 			</div>
