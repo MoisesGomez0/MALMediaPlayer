@@ -23,7 +23,11 @@ session.setAttribute("user", user);
 <link rel="stylesheet" type="text/css" href="styles/index.css">
 
 <script src="jquery-3.4.1.min.js"></script>
-<script src="scripts/scripts.js"></script>
+<script src="scripts/SearchBarManager.js"></script>
+<script src="scripts/MusicListManager.js"></script>
+<script src="scripts/ViewManager.js"></script>
+<script src="scripts/MusicPlayer.js"></script>
+<script src="scripts/DownloadManager.js"></script>
 
 <script>
 
